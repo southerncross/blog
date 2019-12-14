@@ -1,0 +1,36 @@
+@import './variables.styl'
+
+html
+  font-size 18px
+  font-family 'Helvetica Neue', Arial, 'Open Sans', 'Hiragino Sans GB', -apple-system, 'Lantinghei SC', 'Microsoft Yahei', sans-serif
+  color color-main-text
+
+@media (min-width: 600px)
+  ::-webkit-scrollbar
+    width 8px
+    height 8px
+
+  ::-webkit-scrollbar-button
+    width 0px
+    height 0px
+
+  ::-webkit-scrollbar-thumb
+    background rgba(0,0,0,0.2)
+    border none
+    border-radius 4px
+
+  ::-webkit-scrollbar-thumb:hover
+    background-color rgba(0,0,0,0.3)
+
+  ::-webkit-scrollbar-track
+    background-color transparent
+    border none
+
+  ::-webkit-scrollbar-track:hover
+    background-color rgba(0,0,0,0.1)
+
+  ::-webkit-scrollbar-track:active
+    background-color rgba(0,0,0,0.1)
+
+  ::-webkit-scrollbar-corner
+    background transparent

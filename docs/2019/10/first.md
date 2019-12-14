@@ -11,6 +11,10 @@ askldfjkasld
 
 askldfaklsdf
 
+```js
+const a = 123;
+```
+
 <!-- more -->
 
 fffffff
