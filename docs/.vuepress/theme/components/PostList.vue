@@ -1,7 +1,7 @@
 <template>
 <div class="post-list__container">
   <ul class="post-list__list">
-    <li class="post-list__item" v-for="post in posts">
+    <li class="post-list__item" v-for="post in orderedPosts">
       <a :href="post.path">
         <div class="post-list__title">{{post.title}}</div>
         <div class="post-list__date">{{getDateStringFromPath(post.path)}}</div>
@@ -18,6 +18,13 @@ export default {
   name: 'PostList',
   props: {
     posts: Array,
+  },
+  computed: {
+    orderedPosts() {
+      return [...this.posts].sort((a, b) => {
+        return b.path.localeCompare(a.path);
+      });
+    }
   },
   methods: {
     getDateStringFromPath,

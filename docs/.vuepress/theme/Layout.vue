@@ -8,11 +8,6 @@
     </div>
 
     <Footer/>
-
-    <!-- <div style="border: 1px solid red;">
-      <div>{{$site}}</div>
-      <div>{{$page}}</div>
-    </div> -->
   </div>
 </template>
 
@@ -24,6 +19,7 @@ import PostContent from './components/PostContent.vue';
 
 import './common.styl'
 import './normalize.css';
+import './prism.css';
 
 export default {
   components: {

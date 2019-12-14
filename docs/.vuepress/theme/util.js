@@ -4,7 +4,7 @@ function getDateInfoFromPath(path = '') {
   if (!res) {
     return null;
   } else {
-    return { year: res[1], day: res[2] };
+    return { year: Number(res[1]), day: Number(res[2]) };
   }
 }
 

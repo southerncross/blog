@@ -5,7 +5,6 @@
     <span class="post-content__date">{{getDateStringFromPath(post.path)}}</span>
   </div>
   <Content/>
-  {{post}}
 </div>
 </template>
 
