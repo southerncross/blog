@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>自己动手写eslint-plugin解决promise忘记return的问题 | Lishunyang Theme</title>
+    <meta name="description" content="Lishunyang&#39;s Blog">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    
+    <link rel="preload" href="/assets/css/0.styles.69785f0f.css" as="style"><link rel="preload" href="/assets/js/app.017006f2.js" as="script"><link rel="preload" href="/assets/js/3.35930a22.js" as="script"><link rel="preload" href="/assets/js/8.6c276978.js" as="script"><link rel="prefetch" href="/assets/js/1.46c9c9e3.js"><link rel="prefetch" href="/assets/js/10.402d5c66.js"><link rel="prefetch" href="/assets/js/11.d642a307.js"><link rel="prefetch" href="/assets/js/12.b931456c.js"><link rel="prefetch" href="/assets/js/13.64dfe90c.js"><link rel="prefetch" href="/assets/js/14.6d75653e.js"><link rel="prefetch" href="/assets/js/15.65fb1675.js"><link rel="prefetch" href="/assets/js/16.e822ee0d.js"><link rel="prefetch" href="/assets/js/17.5e581b15.js"><link rel="prefetch" href="/assets/js/4.24d4108b.js"><link rel="prefetch" href="/assets/js/5.01d0f0e5.js"><link rel="prefetch" href="/assets/js/6.e16c7064.js"><link rel="prefetch" href="/assets/js/7.41278cc9.js"><link rel="prefetch" href="/assets/js/9.5b82ca15.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.69785f0f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div data-v-58159f8d><ul class="container" data-v-397d2b85 data-v-58159f8d><li class="title" data-v-397d2b85><a href="/" data-v-397d2b85><img src="/assets/img/avatar.cf743a85.jpg" class="avatar" data-v-397d2b85>Lishunyang's Blog</a></li> <li class="item" data-v-397d2b85><a href="https://github.com/southerncross" data-v-397d2b85><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpFNTE3OEEyQTk5QTAxMUUyOUExNUJDMTA0NkE4OTA0RCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpFNTE3OEEyQjk5QTAxMUUyOUExNUJDMTA0NkE4OTA0RCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkU1MTc4QTI4OTlBMDExRTI5QTE1QkMxMDQ2QTg5MDREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkU1MTc4QTI5OTlBMDExRTI5QTE1QkMxMDQ2QTg5MDREIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+m4QGuQAAAyRJREFUeNrEl21ojWEYx895TDPbMNlBK46IUiNmPvHBSUjaqc0H8pF5+aDUKPEBqU2NhRQpX5Rv5jWlDIWlMCv7MMSWsWwmb3tpXub4XXWdPHvc9/Gc41nu+nedc7/8r/99PffLdYdDPsvkwsgkTBwsA/PADJCnzX2gHTwBt8Hl7p537/3whn04XoDZDcpBlk+9P8AFcAghzRkJwPF4zGGw0Y9QS0mAM2AnQj77FqCzrtcwB1Hk81SYojHK4DyGuQ6mhIIrBWB9Xm7ug/6B/nZrBHBegrkFxoVGpnwBMSLR9EcEcC4qb8pP14BWcBcUgewMnF3T34VqhWMFkThLJAalwnENOAKiHpJq1FZgI2AT6HZtuxZwR9GidSHtI30jOrbawxlVX78/AbNfhHlomEUJJI89O2MqeE79T8/nk8nMBm/dK576hZgmA3cp/R4l9/UeSxiHLVIlNm4nFfT0bxyuIj7LHRTKai+zdJobwMKzcZSJb0ePV5PKN+BqAAKE47UlMnERELMM3EdYP/yrd+XYb2mOiYBiQ8OQnoRBlXrl9JZix7D1pHTazu4MoyBcnYamqAjIMTR8G4FT8LuhLsexXYYjICBiqhQBvYb6fLZIJCjPypVvaOoVAW2WcasCnL2Nq82xHJNSqlCeFcDshaPK0twkAhosjZL31QYw+1rlMpWGMArl23SBsZZO58F2tlJXmjOXS+s4WGvpMiBJT/I2PInZ6lIs9/hBsNS1hS6BG0DSqmYEDRlCXQrmy50P1oDRKTSegmNbUsA0zDMwRhPJXeCE3vWLPQMvan6X8AgIa1vcR4AkGZkDR4ejJ1UHpsaVI0g2LInpOsNFUud1rhxSV+fzC9Woz2EZkWQuja7/B+jUrgtIMpy9YCW4n4K41YfzRneW5E1KJTe4B2Zq1Q5EHEtj4U3AfEzR5SVY4l7QYQPJdN2as7RKBF0BPZqqH4VgMAMBL8Byxr7y8zCZiDlnOcEKIPmUpgB5Z2ww5RdOiiRiNajUmWda5IG6WbhsyY2fx6m8gLcoJDJFkH219M3We1+cnda93pfycZpIJEL/s/wSYADmOAwAQgdpBAAAAABJRU5ErkJggg==" class="github" data-v-397d2b85></a></li></ul> <div class="main" data-v-58159f8d><div class="container" data-v-7debe042 data-v-58159f8d><div class="header" data-v-7debe042><h1 class="title" data-v-7debe042>自己动手写eslint-plugin解决promise忘记return的问题</h1> <div class="date" data-v-7debe042>2019/5/19</div></div> <div class="content" data-v-7debe042><div class="content__default" data-v-7debe042><p>最近连续遇到几次因为在Promise链里漏写return而导致的bug了,就是这样:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">...</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 这里忘记写return了</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">param</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 这里result永远是undefined</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><p>有没有什么eslint能够检测发现这个问题呢?貌似是没有.那就自己写一个吧.</p> <h2 id="准备工作"><a href="#准备工作" class="header-anchor">#</a> 准备工作</h2> <p>我们需要对javascript的AST有一定了解,<a href="https://astexplorer.net/" target="_blank" rel="noopener noreferrer">AST Explore<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>这个神器不说了都懂,开发调试必备</p> <p>按照eslint官方文档的方法搭建脚手架,接着就可以开发了(建议看开发时先看第一个,等到要发布的时候再看第二个)</p> <ol><li><a href="https://cn.eslint.org/docs/developer-guide/working-with-rules" target="_blank" rel="noopener noreferrer">working-with-rules<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://cn.eslint.org/docs/developer-guide/working-with-plugins" target="_blank" rel="noopener noreferrer">working-with-plugins<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ol> <p>但是官方文档没有说如何发布和引入,这里推荐两篇写的很清楚的文章:</p> <ol><li><a href="https://flexport.engineering/writing-custom-lint-rules-for-your-picky-developers-67732afa1803" target="_blank" rel="noopener noreferrer">writing-custom-lint-rules-for-your-picky-developers<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://www.kenneth-truyers.net/2016/05/27/writing-custom-eslint-rules/" target="_blank" rel="noopener noreferrer">writing-custom-eslint-rules<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ol> <p>ok,现在开始吧!</p> <h2 id="确定要检查的代码片段"><a href="#确定要检查的代码片段" class="header-anchor">#</a> 确定要检查的代码片段</h2> <p>首先,我们要确定要检查什么样的代码片段,当然是<code>.then</code>这种函数调用了,就像下面这样:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">// then1</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">param</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">// then2</span>
+</code></pre></div><p>简单来说就是符合2个条件:</p> <ol><li>then1的callback带有参数</li> <li>then2的前面还有一个then1</li></ol> <h2 id="确定要检查的规则"><a href="#确定要检查的规则" class="header-anchor">#</a> 确定要检查的规则</h2> <p>这里,我定义了两种检查规则</p> <p>规则1,then1不能没有返回值,即下面这种是错误的</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">// then1 没有返回值</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">param</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">// then2</span>
+</code></pre></div><p>规则2,then1的返回值不能是undefined,即下面这种是错误的</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> <span class="token keyword">return</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">// then1 返回了undefined</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">param</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">// then2</span>
+</code></pre></div><p>其实这两个规则还是粗糙了点,有些场景是检测不出来的,例如:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> <span class="token comment">// then1</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>condition<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> something
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 这个分之忘记return了</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">param</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">// then2</span>
+</code></pre></div><p>又或者</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> foo <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'utils'</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span> <span class="token comment">// then1 不知道foo是什么东西</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">param</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">// then2</span>
+</code></pre></div><p>如果要完全检测所有情况,恐怕要引进data flow analysis和control flow analysis了,虽然理论上是可以的,但成本过高,这里就暂时不考虑了.</p> <h2 id="思路"><a href="#思路" class="header-anchor">#</a> 思路</h2> <p>首先考虑规则1,如何判断callback中到底有没有return呢?一个直观的想法是:把callback函数体的return都找出来不就行了,当然了,这里有三点需要注意</p> <p>一是不能无脑把所有return语句都找出来,比如下面这种代码</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> doubleList <span class="token operator">=</span> list<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">x</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> x <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token comment">// 这里虽然有return,但并不是属于then1的return</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">(</span>param<span class="token punctuation">)</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><p>具体说来,就是我们应该只看属于then1的callback的return,其他函数表达式或函数定义的return都不用看.对应到代码实现上,在遍历的时候,对于function expression或function declaration可以直接跳过.</p> <p>二是即使没有return语句也可能有返回值,比如下面这种代码</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token number">123</span><span class="token punctuation">)</span> <span class="token comment">// 这里没有明确的return statement,但是仍然看做是有返回值的</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">(</span>param<span class="token punctuation">)</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><p>具体说来,我们需要额外考虑函数体是不是identifier,literal,expression等.</p> <p>三是即使找到return也有可能算作是没有return,这个是什么意思呢?看下面的代码</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">asyncFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 这里确实return了</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 但这里才是真正连接下一个promise chain的地方,这里是没有return的</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">(</span>param<span class="token punctuation">)</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><p>这个规则要求我们在找return的时候,如果发现return的是一个call expression,就还要再看这个call expression是否有返回值,而且有可能递归地进一步检查下去.这里稍微有些复杂.</p> <p>接下来是规则2,如何判断callback的return是不是undefined呢?搞定了规则1,这个就比较简单了,既然已经找到了return,那就看看return是不是<code>return;</code>这种形式就得了.</p> <h2 id="代码实现"><a href="#代码实现" class="header-anchor">#</a> 代码实现</h2> <div class="language-js extra-class"><pre class="language-js"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  meta<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">'problem'</span><span class="token punctuation">,</span>
+    docs<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      description<span class="token punctuation">:</span> <span class="token string">'prevent forgotten return statement inside promise callback function'</span><span class="token punctuation">,</span>
+      category<span class="token punctuation">:</span> <span class="token string">'Possible Errors'</span><span class="token punctuation">,</span>
+      recommended<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    fixable<span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token comment">// or &quot;code&quot; or &quot;whitespace&quot;</span>
+    schema<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token comment">// fill in your schema</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token function-variable function">create</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">context</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// variables should be defined here</span>
+
+    <span class="token keyword">const</span> <span class="token constant">ERR_NO_RETURN</span> <span class="token operator">=</span> <span class="token string">'No return statements were found while the next promise chain needs some params.'</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token constant">ERR_RETURN_UNDEFINED</span> <span class="token operator">=</span> <span class="token string">'You need to return something snice the next promise chain needs params.'</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//----------------------------------------------------------------------</span>
+    <span class="token comment">// Helpers</span>
+    <span class="token comment">//----------------------------------------------------------------------</span>
+
+    <span class="token comment">/**
+     * 是否是.then
+     *
+     * @param {Node} node
+     * @return {boolean}
+     */</span>
+    <span class="token keyword">function</span> <span class="token function">checkIsThenNode</span><span class="token punctuation">(</span><span class="token parameter">node</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> node
+        <span class="token operator">&amp;&amp;</span> node<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">'CallExpression'</span>
+        <span class="token operator">&amp;&amp;</span> node<span class="token punctuation">.</span>callee<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">'MemberExpression'</span>
+        <span class="token operator">&amp;&amp;</span> node<span class="token punctuation">.</span>callee<span class="token punctuation">.</span>property<span class="token punctuation">.</span>name <span class="token operator">===</span> <span class="token string">'then'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * 是否是callback
+     *
+     * @param {Node} node
+     * @param {boolean} requireParam - 是否需要有参数
+     * @return {boolean}
+     */</span>
+    <span class="token keyword">function</span> <span class="token function">checkIsCallback</span><span class="token punctuation">(</span><span class="token parameter">node<span class="token punctuation">,</span> requireParam</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> node
+        <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">'ArrowFunctionExpression'</span> <span class="token operator">||</span> node<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">'FunctionExpression'</span><span class="token punctuation">)</span>
+        <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token operator">!</span>requireParam <span class="token operator">||</span> node<span class="token punctuation">.</span>params<span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * 已知一个.then,寻找语法前置then
+     *
+     * @param {CallExpression} node
+     * @return {CallExpression}
+     */</span>
+    <span class="token keyword">function</span> <span class="token function">findPrevThenNode</span><span class="token punctuation">(</span><span class="token parameter">node</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>node <span class="token operator">&amp;&amp;</span> <span class="token function">checkIsThenNode</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>callee<span class="token punctuation">.</span>object<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> node<span class="token punctuation">.</span>callee<span class="token punctuation">.</span>object<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * return表达式是否返回了非空的内容
+     *
+     * @param {ReturnStatement} statement
+     * @param {number} depth - 递归深度,用来辅助判断是否returnable
+     * @return {boolean} whether has returnable statement
+     */</span>
+    <span class="token keyword">function</span> <span class="token function">shouldReturnSomething</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> statement<span class="token punctuation">,</span> parent<span class="token punctuation">,</span> depth <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>statement<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token keyword">let</span> returnable <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+      depth<span class="token operator">++</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token regex">/Expression|Literal|Identifier/</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>statement<span class="token punctuation">.</span>type<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        returnable <span class="token operator">=</span> depth <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// 只有第一层的expression/literal/identifier是returnable的</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token regex">/ReturnStatement/</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>statement<span class="token punctuation">.</span>type<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        returnable <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token comment">// 其他时候有return都是returnable的</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token keyword">switch</span> <span class="token punctuation">(</span>statement<span class="token punctuation">.</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> <span class="token string">'ReturnStatement'</span><span class="token punctuation">:</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>statement<span class="token punctuation">.</span>argument<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 表示 return;</span>
+            context<span class="token punctuation">.</span><span class="token function">report</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+              node<span class="token punctuation">:</span> statement<span class="token punctuation">,</span>
+              message<span class="token punctuation">:</span> <span class="token constant">ERR_RETURN_UNDEFINED</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 递归验证</span>
+            returnable <span class="token operator">|=</span> <span class="token function">shouldReturnSomething</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+              statement<span class="token punctuation">:</span> statement<span class="token punctuation">.</span>argument<span class="token punctuation">,</span>
+              parent<span class="token punctuation">:</span> statement<span class="token punctuation">,</span>
+              depth<span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+          <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token string">'CallExpression'</span><span class="token punctuation">:</span>
+          <span class="token comment">// 判断是不是另一个.then</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>parent<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">'ReturnStatement'</span> <span class="token operator">&amp;&amp;</span> <span class="token function">checkIsThenNode</span><span class="token punctuation">(</span>statement<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">checkIsCallback</span><span class="token punctuation">(</span>statement<span class="token punctuation">.</span>arguments<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            returnable <span class="token operator">|=</span> <span class="token function">shouldReturnSomething</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+              statement<span class="token punctuation">:</span> statement<span class="token punctuation">.</span>arguments<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>body<span class="token punctuation">,</span>
+              parent<span class="token punctuation">:</span> statement<span class="token punctuation">,</span>
+              depth<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token comment">// 此时要重置depth,以处理 return () =&gt; () =&gt; () =&gt; value 这种代码</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+          <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token string">'BlockStatement'</span><span class="token punctuation">:</span>
+          statement<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">stmt</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            returnable <span class="token operator">|=</span> <span class="token function">shouldReturnSomething</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+              statement<span class="token punctuation">:</span> stmt<span class="token punctuation">,</span>
+              parent<span class="token punctuation">:</span> statement<span class="token punctuation">.</span>body<span class="token punctuation">,</span>
+              depth<span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token string">'WhileStatement'</span><span class="token punctuation">:</span>
+        <span class="token keyword">case</span> <span class="token string">'DoWhileStatement'</span><span class="token punctuation">:</span>
+        <span class="token keyword">case</span> <span class="token string">'ForStatement'</span><span class="token punctuation">:</span>
+        <span class="token keyword">case</span> <span class="token string">'ForInStatement'</span><span class="token punctuation">:</span>
+        <span class="token keyword">case</span> <span class="token string">'ForOfStatement'</span><span class="token punctuation">:</span>
+          returnable <span class="token operator">|=</span> <span class="token function">shouldReturnSomething</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            statement<span class="token punctuation">:</span> statement<span class="token punctuation">.</span>body<span class="token punctuation">,</span>
+            parent<span class="token punctuation">:</span> statement<span class="token punctuation">,</span>
+            depth<span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token string">'IfStatement'</span><span class="token punctuation">:</span>
+          returnable <span class="token operator">|=</span> <span class="token function">shouldReturnSomething</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            statement<span class="token punctuation">:</span> statement<span class="token punctuation">.</span>consequent<span class="token punctuation">,</span>
+            parent<span class="token punctuation">:</span> statement<span class="token punctuation">,</span>
+            depth<span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          returnable <span class="token operator">|=</span> <span class="token function">shouldReturnSomething</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            statement<span class="token punctuation">:</span> statement<span class="token punctuation">.</span>alternate<span class="token punctuation">,</span>
+            depth<span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token string">'SwitchStatement'</span><span class="token punctuation">:</span>
+          statement<span class="token punctuation">.</span>cases<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">caseNode</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            caseNode<span class="token punctuation">.</span>consequent<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">stmt</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+              returnable <span class="token operator">|=</span> <span class="token function">shouldReturnSomething</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                statement<span class="token punctuation">:</span> stmt<span class="token punctuation">,</span>
+                parent<span class="token punctuation">:</span> caseNode<span class="token punctuation">,</span>
+                depth<span class="token punctuation">,</span>
+              <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token string">'TryStatement'</span><span class="token punctuation">:</span>
+          returnable <span class="token operator">|=</span> <span class="token function">shouldReturnSomething</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            statement<span class="token punctuation">:</span> statement<span class="token punctuation">.</span>block<span class="token punctuation">,</span>
+            parent<span class="token punctuation">:</span> statement<span class="token punctuation">,</span>
+            depth<span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">default</span><span class="token punctuation">:</span>
+          <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>depth <span class="token operator">===</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>returnable<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        context<span class="token punctuation">.</span><span class="token function">report</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+          node<span class="token punctuation">:</span> parent<span class="token punctuation">,</span>
+          message<span class="token punctuation">:</span> <span class="token constant">ERR_NO_RETURN</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token keyword">return</span> returnable<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">//----------------------------------------------------------------------</span>
+    <span class="token comment">// Public</span>
+    <span class="token comment">//----------------------------------------------------------------------</span>
+
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      <span class="token comment">// give me methods</span>
+      <span class="token function-variable function">CallExpression</span><span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">node</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">checkIsThenNode</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">checkIsCallback</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>arguments<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">const</span> prev <span class="token operator">=</span> <span class="token function">findPrevThenNode</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">checkIsThenNode</span><span class="token punctuation">(</span>prev<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">checkIsCallback</span><span class="token punctuation">(</span>prev<span class="token punctuation">.</span>arguments<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">shouldReturnSomething</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+              statement<span class="token punctuation">:</span> prev<span class="token punctuation">.</span>arguments<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>body<span class="token punctuation">,</span>
+              parent<span class="token punctuation">:</span> prev<span class="token punctuation">.</span>arguments<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div></div></div></div></div> <div class="container" data-v-5d7cf863 data-v-58159f8d>
+  Designed by Lishunyang | All right reserved
+</div></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.017006f2.js" defer></script><script src="/assets/js/3.35930a22.js" defer></script><script src="/assets/js/8.6c276978.js" defer></script>
+  </body>
+</html>
