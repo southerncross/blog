@@ -1,10 +1,10 @@
 <template>
-<div class="post-list__container">
-  <ul class="post-list__list">
-    <li class="post-list__item" v-for="post in orderedPosts">
+<div class="container">
+  <ul class="list">
+    <li class="item" v-for="post in orderedPosts">
       <a :href="post.path">
-        <div class="post-list__title">{{post.title}}</div>
-        <div class="post-list__date">{{getDateStringFromPath(post.path)}}</div>
+        <div class="title">{{post.title}}</div>
+        <div class="date">{{getDateStringFromPath(post.path)}}</div>
       </a>
     </li>
   </ul>
@@ -39,32 +39,35 @@ export default {
 
 <style scoped lang="stylus">
 @import '../variables.styl'
-.post-list__list
+.list
   padding 0
   list-style none
 
-.post-list__item
+.item
   color color-main-text
+  border-bottom 1px dashed color-border
 
   & a
     position relative
     display block
-    padding 1rem
+    padding 1rem 0
     color color-main-text
-    text-decoration none
-    border-bottom 1px solid
-    border-bottom-color color-border
-    transition color .5s, border-bottom-color .5s
     &:hover
       color color-main-text-hover
       border-bottom-color color-main-text-hover
 
-.post-list__title
-  font-size 1.3rem
+.title
+  width calc(100% - 60px)
+  font-size 1rem
+  white-space nowrap
+  text-overflow ellipsis
+  overflow hidden
 
-.post-list__date
+.date
   position absolute
-  top 1.2rem
-  right 1rem
+  top 1.1rem
+  right 0
+  font-size 0.8rem
+  color color-quote-text
 
 </style>

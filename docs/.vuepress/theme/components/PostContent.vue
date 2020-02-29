@@ -1,15 +1,17 @@
 <template>
-<div class="post-content__container">
-  <div class="post-content__header">
-    <span class="post-content__title">{{post.title}}</span>
-    <span class="post-content__date">{{getDateStringFromPath(post.path)}}</span>
+<div class="container">
+  <div class="header">
+    <h1 class="title">{{post.title}}</h1>
+    <div class="date">{{getPostDateString(post.frontmatter.date)}}</div>
   </div>
-  <Content/>
+  <div class="content">
+    <Content/>
+  </div>
 </div>
 </template>
 
 <script>
-import { getDateStringFromPath } from '../util.js';
+import { getDateStringFromPath, getPostDateString } from '../util.js';
 
 export default {
   name: 'PostContent',
@@ -18,22 +20,39 @@ export default {
   },
   methods: {
     getDateStringFromPath,
+    getPostDateString,
   }
 }
 </script>
 
+<style lang="stylus">
+@import '../variables.styl'
+.content
+  a:hover
+    color color-link
+
+  img
+    max-width 100%
+    padding 10px
+    border-radius 8px
+    box-shadow 0px 2px 4px 0px rgba(0,0,0,0.15)
+
+  p code
+    padding 0 4px
+    background-color color-code-bg
+    border-radius 4px
+</style>
+
 <style scoped lang="stylus">
 @import '../variables.styl'
 
-.post-content__header
+.header
   position relative
   padding 1rem 0 2rem 0
 
-.post-content__title
+.title
   font-size 2rem
 
-.post-content__date
-  position absolute
-  right 0
-  top 1.6rem
+.date
+  color color-quote-text
 </style>

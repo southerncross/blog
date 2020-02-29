@@ -17,7 +17,13 @@ function getDateStringFromPath(path = '') {
   }
 }
 
+function getPostDateString(str) {
+  const date = new Date(str);
+  return [date.getFullYear(), date.getMonth() + 1, date.getDate()].join('/');
+}
+
 export {
   getDateInfoFromPath,
   getDateStringFromPath,
+  getPostDateString,
 };

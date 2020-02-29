@@ -1,18 +1,17 @@
 <template>
-<div class="footer__container">
-  <span class="footer__content">Designed by Lishunyang | All right reserved</span>
+<div class="container">
+  Designed by Lishunyang | All right reserved
 </div>
 </template>
 
 <style scoped lang="stylus">
 @import '../variables.styl'
 
-.footer__container
-  height 3rem
-  padding 2rem
-  text-align center
-
-.footer__content
+.container
+  display flex
+  justify-content center
+  align-items center
+  height 64px
   font-size 12px
   color color-copyright
 </style>

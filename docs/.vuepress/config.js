@@ -1,11 +1,11 @@
 module.exports = {
-  title: 'Hello',
-  description: 'My First Blog',
+  title: 'Lishunyang Theme',
+  description: "Lishunyang's Blog",
   head: [
-    ['link', { rel: 'icon', href: '/logo.png' }],
+    ['link', { rel: 'icon', type: 'image/png', href: '/assets/favicon.png' }]
   ],
   themeConfig: {
-    logo: '/assets/img/logo.png',
+    logo: '/assets/favicon.png',
     nav: [
       { text: 'Github', link: 'https://github.com/southerncross' },
     ],

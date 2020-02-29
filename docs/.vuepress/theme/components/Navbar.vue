@@ -1,8 +1,8 @@
 <template>
-  <ul class="navbar__container">
-    <li class="navbar__title"><a :href="$site.base">Lishunyang's Blog</a></li>
-    <li class="navbar__item" v-for="item in $site.themeConfig.nav">
-      <a :href="item.link">{{item.text}}</a>
+  <ul class="container">
+    <li class="title"><a :href="$site.base"><img class="avatar" src="../assets/avatar.jpg"/>Lishunyang's Blog</a></li>
+    <li class="item" v-for="item in $site.themeConfig.nav">
+      <a :href="item.link"><img class="github" src="../assets/github.png"/></a>
     </li>
   </ul>
 </template>
@@ -20,7 +20,7 @@ export default {
 <style scoped lang="stylus">
 @import '../variables.styl'
 
-.navbar__container
+.container
   position fixed
   z-index 3
   top 0
@@ -29,14 +29,16 @@ export default {
   display flex
   justify-content flex-end
   align-items center
-  padding 1em
+  height 64px
+  padding 0 1em
   margin 0
   list-style none
   background color-background
-  border-bottom 1px solid color-border
   color color-main-text
+  background rgba(255,255,255,1)
+  box-shadow 0px 2px 4px 0px rgba(0,0,0,0.15)
 
-.navbar__title
+.title
   flex none
   position absolute
   left 1em
@@ -47,7 +49,15 @@ export default {
     &:hover
       color color-main-text-hover
 
-.navbar__item
+.avatar
+  width 32px
+  margin-right 1em
+  vertical-align middle
+
+.github
+  width 20px
+
+.item
   flex none
   margin-left 2em
   & a

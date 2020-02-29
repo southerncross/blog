@@ -12,12 +12,7 @@ date: 2020-02-29 21:15
 如果观察html源代码你会发现，这其实就是个a标签：
 
 ```html
-<a
-  href="https://nodejs.org/dist/v12.16.1/node-v12.16.1-x64.msi"
-  target="_blank"
->
-  12.16.1 LTS
-</a>
+<a href="https://nodejs.org/dist/v12.16.1/node-v12.16.1-x64.msi">12.16.1 LTS</a>
 ```
 
 看上去就是一个普通的a标签而已，我们知道a标签的默认行为应该是打开一个页面才对，你有没有想过为什么这里的a标签不是打开一个页面而是触发了下载行为呢？
@@ -134,7 +129,7 @@ Content-Disposition: attachment; filename=hello.html
 HTTP/1.1 200 OK
 Content-Type: text/html
 Set-Cookie: something
-                                                      <-- 注意这里的\r\n
+                              <-- 注意这里的\r\n
 
 Content-Disposition: attachment;filename=xss.htm
 

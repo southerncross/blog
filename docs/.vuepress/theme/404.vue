@@ -1,9 +1,9 @@
 <template>
-  <div class="layout__container">
+  <div class="container">
     <Navbar :items="$site.themeConfig.nav"/>
 
-    <div class="layout__main">
-      <a :href="$site.base">我是谁，我在哪，请带我回家</a>
+    <div class="main">
+      <a class="link" :href="$site.base">我是谁，我在哪，请带我回家</a>
     </div>
 
     <Footer/>
@@ -30,14 +30,19 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-.layout__container
-  margin-top 10vh
+@import './variables.styl'
 
-.layout__main
+.main
+  display flex
+  justify-content center
+  align-items center
   width 90%
   max-width 720px
-  min-height calc(100vh - 15rem)
-  margin 0 auto
-  text-align center
+  min-height calc(100vh - 128px)
+  padding-top 1em
+  margin 64px auto 0 auto
+
+.link:hover
+  color color-link
 </style>
 
