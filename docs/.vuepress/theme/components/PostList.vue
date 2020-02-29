@@ -22,7 +22,12 @@ export default {
   computed: {
     orderedPosts() {
       return [...this.posts].sort((a, b) => {
-        return b.path.localeCompare(a.path);
+        // 按时间顺序倒叙排列
+        if (a.frontmatter.date && b.frontmatter.date) {
+          return b.frontmatter.date.localeCompare(a.frontmatter.date)
+        } else {
+          return b.path.localeCompare(a.path);
+        }
       });
     }
   },
