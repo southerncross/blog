@@ -1,0 +1,198 @@
+extends:
+  - prettier
+  - plugin:vue/recommended
+parser: vue-eslint-parser
+parserOptions:
+  parser: babel-eslint
+  sourceType: module
+  ecmaFeatures:
+    classes: true
+    modules: true
+    blockBindings: true
+    forOf: true
+
+env:
+  es6: true
+
+plugins:
+  - unicorn
+  - prettier
+  - vue
+
+overrides:
+  # front-end
+  - files: docs/.vuepress/theme/**/*.vue
+    env:
+      browser: true
+      es6: true
+  # back-end
+  - files:
+      - serverless.js
+    env:
+      node: true
+      es6: true
+
+rules:
+  # [Possible errors]
+  comma-dangle:
+    - error
+    - always-multiline
+  no-cond-assign: error
+  no-constant-condition: error
+  no-dupe-args: error
+  no-dupe-keys: error
+  no-duplicate-case: error
+  no-empty: error
+  no-extra-boolean-cast: error
+  no-extra-semi: error
+  no-func-assign: error
+  no-inner-declarations: error
+  no-invalid-regexp: error
+  no-irregular-whitespace: error
+  no-negated-in-lhs: error
+  no-obj-calls: error
+  no-sparse-arrays: error
+  use-isnan: error
+  valid-typeof: error
+  no-unexpected-multiline: error
+  no-unreachable: error
+
+  # [Best practices]
+  no-lone-blocks: error
+  no-multi-spaces: error
+  no-native-reassign: error
+  no-new: error
+  no-redeclare: error
+  no-self-compare: error
+  no-sequences: error
+  no-unused-expressions: error
+  no-with: error
+  dot-notation:
+    - error
+    - allowKeywords: true
+  no-eval: error
+  no-alert: error
+  eqeqeq:
+    - error
+    - allow-null
+  curly:
+    - error
+    - all
+
+  # [Variables]
+  no-shadow-restricted-names: error
+  no-shadow: error
+  no-undef-init: error
+  no-undef: error
+  no-undefined: error
+  no-unused-vars: error
+  no-use-before-define: error
+
+  # Stylistic issues
+  array-bracket-spacing:
+    - error
+    - never
+  # block-spacing:
+  #  - error
+  #  - always
+  brace-style:
+    - error
+    - 1tbs
+    - allowSingleLine: true
+  # camelcase:
+  #   - warn
+  #   - properties: never
+  comma-spacing:
+    - error
+    - before: false
+      after: true
+  comma-style:
+    - error
+    - last
+  computed-property-spacing:
+    - error
+    - never
+  eol-last: error
+  # func-style:
+  #  - error
+  #  - declaration
+  # indent:
+  #   - warn
+  #   - 2
+  #   - MemberExpression: 0
+  #     flatTernaryExpressions: true
+  #     ignoredNodes:
+  #       - ConditionalExpression
+  key-spacing:
+    - error
+    - beforeColon: false
+      afterColon: true
+  # linebreak-style:
+  #   - error
+  #   - unix
+  new-cap:
+    - error
+    - capIsNew: false
+  new-parens: error
+  no-mixed-spaces-and-tabs: error
+  no-new-object: error
+  no-spaced-func: error
+  no-trailing-spaces: error
+  no-unneeded-ternary: error
+  object-curly-spacing:
+    - error
+    - always
+  one-var:
+    - error
+    - never
+  operator-assignment:
+    - warn
+    - always
+  # padded-blocks:
+  #   - warn
+  #   - never
+  quotes:
+    - error
+    - single
+  quote-props:
+    - error
+    - as-needed
+    - keywords: true
+  semi: error
+  semi-spacing:
+    - error
+    - before: false
+      after: true
+  space-before-blocks:
+    - error
+    - always
+  keyword-spacing: error
+  space-in-parens:
+    - error
+    - never
+  space-infix-ops: error
+  space-unary-ops: error
+
+  # [ES6]
+  arrow-parens:
+    - error
+    - always
+  arrow-spacing:
+    - error
+    - before: true
+      after: true
+  constructor-super: error
+  no-class-assign: error
+  no-const-assign: error
+  no-dupe-class-members: error
+  no-this-before-super: error
+  no-var: error
+  # object-shorthand: error
+  # prefer-arrow-callback: error
+  # prefer-const: error
+  prefer-spread: error
+  # prefer-template: error
+  unicorn/no-abusive-eslint-disable: error
+
+  # [Plugin]
+  prettier/prettier: error
