@@ -1,0 +1,18 @@
+Globals:
+  Function:
+    Timeout: 10
+
+Resources:
+  default:
+    Type: TencentCloud::Serverless::Namespace
+    blog:
+      Type: TencentCloud::Serverless::Function
+      Properties:
+        CodeUri: ./
+        Type: Event
+        Description: Lishunyang's blog
+        Role: QCS_SCFExcuteRole
+        Handler: serverless.main
+        MemorySize: 64
+        Runtime: Nodejs8.9
+        Timeout: 3

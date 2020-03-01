@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "lint": "npx eslint docs/.vuepress/theme --ext .vue"
+    "lint": "npx eslint docs/.vuepress/theme --ext .vue",
+    "deploy": "sh deploy-serverless.sh"
   },
   "repository": {
     "type": "git",
