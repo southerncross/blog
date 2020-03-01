@@ -39,6 +39,7 @@ export default {
 
   p code
     padding 0 4px
+    word-break break-all
     background-color color-code-bg
     border-radius 4px
 </style>
