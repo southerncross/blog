@@ -29,7 +29,7 @@ function getFileInfo(filepath) {
     mime: determinMIME(filepath),
     content: '',
     isBase64Encoded: false,
-  }
+  };
 
   if (/html|javascript|css/.test(fileInfo.mime)) {
     fileInfo.content = fs.readFileSync(filepath, { encoding: 'utf8' });
@@ -42,10 +42,19 @@ function getFileInfo(filepath) {
   return fileInfo;
 }
 
+function getCacheValidator(filepath) {
+  return {
+    mtime: fs.lstatSync(filepath).mtime,
+  };
+}
+
 exports.main = async (event) => {
   const result = {
     isBase64Encoded: false,
-    headers: { 'X-Content-Type-Options': 'nosniff' },
+    headers: {
+      'X-Content-Type-Options': 'nosniff',
+      'Cache-Control': 'public, max-age: 86400',
+    },
     body: '',
   };
 
@@ -66,11 +75,17 @@ exports.main = async (event) => {
       filepath = path.join(absolutePath, '404.html');
     }
 
-    const { mime, content, isBase64Encoded } = getFileInfo(filepath);
-    result.body = content;
-    result.isBase64Encoded = isBase64Encoded;
-    result.headers['Content-Type'] = mime;
-    result.statusCode = 200;
+    const { mtime } = getCacheValidator(filepath);
+    if (new Date(event.headers['if-modified-since']).getTime() === new Date(mtime).getTime()) {
+      result.statusCode = 304;
+    } else {
+      const { mime, content, isBase64Encoded } = getFileInfo(filepath);
+      result.body = content;
+      result.isBase64Encoded = isBase64Encoded;
+      result.headers['Content-Type'] = mime;
+      result.headers['Last-Modified'] = mtime;
+      result.statusCode = 200;
+    }
   } catch (e) {
     console.log(e);
     result.body = 'ERROR';
