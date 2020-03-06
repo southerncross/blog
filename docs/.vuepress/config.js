@@ -10,6 +10,7 @@ module.exports = {
       { text: 'Github', link: 'https://github.com/southerncross' },
     ],
   },
+  shouldPrefetch: () => false,
   plugins: [
     [
       '@vuepress/google-analytics',
