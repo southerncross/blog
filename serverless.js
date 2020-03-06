@@ -16,6 +16,8 @@ function determinMIME(pathname) {
       case 'jpg':
       case 'jpeg':
         return 'image/jpeg';
+      default:
+        return 'text/plain';
     }
   } catch (e) {
     return 'text/plain';
