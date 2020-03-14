@@ -7,7 +7,9 @@
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
     "lint": "npx eslint docs/.vuepress/theme --ext .vue",
-    "deploy": "sh deploy-serverless.sh"
+    "deploy-gh": "sh deploy-gh.sh",
+    "deploy-serverless": "sh deploy-serverless.sh",
+    "deploy-vps": "sh deploy-vps.sh"
   },
   "repository": {
     "type": "git",
