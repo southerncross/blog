@@ -20,6 +20,6 @@ scp $blog_name $user@$host:~/
 
 ssh $user@$host "nohup ./deploy_blog.sh $blog_name"
 
-cd -
-
 rm $blog_name
+
+cd -
