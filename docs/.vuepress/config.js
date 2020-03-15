@@ -1,8 +1,9 @@
 module.exports = {
-  title: 'Lishunyang Theme',
+  title: "Lishunyang's Blog",
   description: "Lishunyang's Blog",
   head: [
     ['link', { rel: 'icon', type: 'image/png', href: '/favicon.png' }],
+    ['meta', { name: 'keywords', content: 'Javascript,HTTP,Nodejs,React' }]
   ],
   themeConfig: {
     logo: '/favicon.png',
