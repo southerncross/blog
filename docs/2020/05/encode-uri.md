@@ -30,7 +30,7 @@ scheme   authority       path        query   fragment
    character's purpose as a delimiter, then the conflicting data must be
    percent-encoded before the URI is formed.
 
-这句话其实很有深意的，需要细品。一会儿我们会提到。
+大意就是：如果可能会导致歧义，则应该将保留字符用百分号编码转码。
 
 保留字符有哪些呢？根据最新的URI语法规范[RFC-3986](https://tools.ietf.org/html/rfc3986#section-2.2)
 
@@ -113,3 +113,15 @@ window.location.href = 'http://test.exmaple.com/中文'
 按理说非URL字符需要百分号编码，这样写出来的URL难道不是错的吗。其实多虑了，这样写跟你在浏览器的地址栏里直接输入中文URL是一样的效果，浏览器在发出请求前会自动帮你做一次“encode”。但是注意，这里的encode可不是直接调用了javascript自带的encodeURI（如果你没看懂这句话，我算是白解释了）。
 
 那么，如果要保证兼容性，还是得把URL来个encodeURI靠谱（至少解决了`[]`的兼容性问题。但这里要注意了，encodeURI的内容如果包含了百分号，那么百分号会被再次encode，得到的结果可能并不是想要的。总之就是，encodeURL这个事情，有点麻烦。。
+
+其实本来已经心满意足了，结果我又想了想，既然`[]`在新版规范里已经属于合法URL字符集了，那之前的一帮难兄难弟诸如`{}`，`|`，`^`是不是也可以平反了？但是翻遍了RFC-3986也没有看到关于这几个字符的调整，所以说这几个仍然算是unwise字符咯？
+
+为了满足我的好奇心，我在浏览器中输入一个`https://stackoverflow.com/search?q=square+brackets+{中文}`（注意最后是个`{}`）。结果出乎意料，`{}`也没有被编码：
+
+![](./uri_bracket_test.png)
+
+然后，经过大概3分钟的加载时间后，stackoverflow挂了🤦
+
+![](./stack_overflow_down.png)
+
+看来的确是个令人头疼的问题啊
