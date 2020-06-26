@@ -31,5 +31,9 @@
     "eslint-plugin-vue": "^6.2.1",
     "vue-eslint-parser": "^7.0.0",
     "vuepress": "^1.2.0"
+  },
+  "dependencies": {
+    "@vssue/api-github-v3": "^1.4.4",
+    "@vssue/vuepress-plugin-vssue": "^1.4.6"
   }
 }

@@ -7,6 +7,9 @@
   <div class="content">
     <Content/>
   </div>
+  <div class="comment">
+    <Vssue/>
+  </div>
 </div>
 </template>
 
@@ -56,4 +59,7 @@ export default {
 
 .date
   color color-quote-text
+
+.comment
+  margin-top 100px
 </style>
