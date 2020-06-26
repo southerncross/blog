@@ -66,6 +66,7 @@ export default {
 
 <style lang="stylus">
 .vssue-button-login
+.vssue-button-submit-comment
   padding 0 !important
   border 0 !important
   font-weight normal !important
