@@ -63,3 +63,13 @@ export default {
 .comment
   margin-top 100px
 </style>
+
+<style lang="stylus">
+.vssue-button-login
+  padding 0 !important
+  border 0 !important
+  font-weight normal !important
+
+.vssue-header-powered-by span
+  color #9a9fac !important
+</style>

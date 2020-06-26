@@ -19,7 +19,7 @@ module.exports = {
     '@vssue/vuepress-plugin-vssue': {
       // set `platform` rather than `api`
       platform: 'github',
-
+      locale: 'zh',
       // all other options of Vssue are allowed
       owner: 'southerncross',
       repo: 'blog',
