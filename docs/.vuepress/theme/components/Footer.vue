@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  Designed by Lishunyang | All right reserved
+  Designed by Lishunyang | 京ICP备20009157号 | All right reserved
 </div>
 </template>
 
