@@ -4,6 +4,12 @@
     <h1 class="title">{{post.title}}</h1>
     <div class="date">{{getPostDateString(post.frontmatter.date)}}</div>
   </div>
+  <div>{{post.headers}}</div>
+  <ul class="sidebar">
+    <li class="sidebar-item" v-for="header of post.headers.filter((x) => x.level === 2)">
+      <a :href="getNavLink(header.title)">{{header.title}}</a>
+    </li>
+  </ul>
   <div class="content">
     <Content/>
   </div>
@@ -24,6 +30,9 @@ export default {
   methods: {
     getDateStringFromPath,
     getPostDateString,
+    getNavLink(title) {
+      return `${window.location.pathname}#${title}`;
+    }
   }
 }
 </script>
@@ -62,6 +71,23 @@ export default {
 
 .comment
   margin-top 100px
+
+.sidebar
+  position fixed
+  right calc(50vw + 360px + 20px)
+  top 280px
+  width 300px
+  padding-right 20px
+  list-style none
+  border-right 1px dashed #9a9fac
+
+.sidebar-item
+  margin-top 6px
+  text-align right
+  line-height 1.2
+  color #292c32
+  &:hover
+    color #0366d6
 </style>
 
 <style lang="stylus">
