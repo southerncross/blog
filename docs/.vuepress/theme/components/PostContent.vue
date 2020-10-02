@@ -4,8 +4,7 @@
     <h1 class="title">{{post.title}}</h1>
     <div class="date">{{getPostDateString(post.frontmatter.date)}}</div>
   </div>
-  <div>{{post.headers}}</div>
-  <ul class="sidebar">
+  <ul v-if="post.headers" class="sidebar">
     <li class="sidebar-item" v-for="header of post.headers.filter((x) => x.level === 2)">
       <a :href="getNavLink(header.title)">{{header.title}}</a>
     </li>
