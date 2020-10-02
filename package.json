@@ -30,7 +30,8 @@
     "eslint-plugin-unicorn": "^16.1.1",
     "eslint-plugin-vue": "^6.2.1",
     "vue-eslint-parser": "^7.0.0",
-    "vuepress": "^1.2.0"
+    "vuepress": "^1.2.0",
+    "vuepress-plugin-zooming": "^1.1.8"
   },
   "dependencies": {
     "@vssue/api-github-v3": "^1.4.4",

@@ -26,5 +26,12 @@ module.exports = {
       clientId: '2797003e5e35203c9d05',
       clientSecret: 'ec65896b3f509f599200d560eab102eaac984c55',
     },
+    'vuepress-plugin-zooming': {
+      selector: '.content img',
+      delay: 500,
+      options: {
+        zIndex: 10000,
+      },
+    },
   },
 };
