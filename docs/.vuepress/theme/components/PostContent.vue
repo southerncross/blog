@@ -2,11 +2,17 @@
 <div class="container">
   <div class="header">
     <h1 class="title">{{post.title}}</h1>
-    <div class="date">{{getPostDateString(post.frontmatter.date)}}</div>
+    <div class="date-and-tags">
+      <span class="date">{{getPostDateString(post.frontmatter.date)}}</span>
+      <span v-if="post.frontmatter.tags" class="tags">
+        <span v-for="tag of post.frontmatter.tags.split(' ')" class="tag">{{tag}}</span>
+      </span>
+    </div>
   </div>
+  {{post}}
   <ul v-if="post.headers" class="sidebar">
     <li class="sidebar-item" v-for="header of post.headers.filter((x) => x.level === 2)">
-      <a :href="getNavLink(header.title)">{{header.title}}</a>
+      <a :href="getNavLink(post.path, header.title)">{{header.title}}</a>
     </li>
   </ul>
   <div class="content">
@@ -29,8 +35,8 @@ export default {
   methods: {
     getDateStringFromPath,
     getPostDateString,
-    getNavLink(title) {
-      return `${window.location.pathname}#${title}`;
+    getNavLink(path, title) {
+      return `${path}#${title.toLowerCase().replace(/ /g, '-')}`;
     }
   }
 }
@@ -65,7 +71,20 @@ export default {
 .title
   font-size 2rem
 
+.date-and-tags
+  position relative
+  color color-quote-text
+
 .date
+  color color-quote-text
+
+.tags
+  position absolute
+  right 0
+
+.tag
+  display inline-block
+  margin-right 0.5em
   color color-quote-text
 
 .comment
@@ -78,15 +97,15 @@ export default {
   width 300px
   padding-right 20px
   list-style none
-  border-right 1px dashed #9a9fac
+  border-right 1px dashed color-border
 
 .sidebar-item
   margin-top 6px
   text-align right
   line-height 1.2
-  color #292c32
+  color color-main-text
   &:hover
-    color #0366d6
+    color color-link
 </style>
 
 <style lang="stylus">
@@ -97,5 +116,5 @@ export default {
   font-weight normal !important
 
 .vssue-header-powered-by span
-  color #9a9fac !important
+  color color-quote-text !important
 </style>

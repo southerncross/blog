@@ -1,6 +1,7 @@
 ---
 title: 调试nodejs程序总结
 date: 2020-10-02 15:02
+tags: nodejs debug inspect
 ---
 
 在开发node程序时，有些时候你需要频繁查看程序的运行状态，比如说开发babel-plugin的时候，你需要经常性地观察AST的结构，如果每次都是用console.log那也未免太低效了，这个时候就需要使用nodejs的调试技巧了。
