@@ -9,7 +9,6 @@
       </span>
     </div>
   </div>
-  {{post}}
   <ul v-if="post.headers" class="sidebar">
     <li class="sidebar-item" v-for="header of post.headers.filter((x) => x.level === 2)">
       <a :href="getNavLink(post.path, header.title)">{{header.title}}</a>
