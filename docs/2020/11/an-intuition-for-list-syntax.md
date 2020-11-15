@@ -1,7 +1,7 @@
 ---
 title: 【译】Lisp语法的直观解释
 date: 2020-11-08 15:37
-tags: nodejs debug inspect
+tags: meta-programming programming-language javascript lisp
 ---
 
 本文翻译自[An Intuition for Lisp Syntax](https://stopa.io/post/265)
