@@ -6,7 +6,7 @@ tags: meta-programming programming-language javascript lisp
 
 本文翻译自[An Intuition for Lisp Syntax](https://stopa.io/post/265)
 
-最初是在Hcakernews上看到的，觉得非常有意思，于是就忍不住翻译过来了，以下是正文。
+最初是在Hackernews上看到的，觉得非常有意思，于是就忍不住翻译过来了，以下是正文。
 
 -----
 
@@ -319,11 +319,11 @@ webSocket.onMessage((instructions) => {
 比方说他们想做到这样的效果：
 
 ```js
-const drawTriangle = function(left, top, right, color) { 
+const drawTriangle = function(left, top, right, color) {
    drawLine(left, top, color);
-   drawLine(top, right, color); 
-   drawLine(left, right, color); 
-} 
+   drawLine(top, right, color);
+   drawLine(left, right, color);
+}
 drawTriangle(...);
 ```
 
@@ -409,10 +409,10 @@ const newVariables = {...oldVariables, ...mapArgsWithValues(args, values)}
 ```js
 const newVariables = {
   ...oldVariables,
-  left: { x: 0, y: 0 }, 
+  left: { x: 0, y: 0 },
   top: { x: 3, y: 3 },
-  right: {x: 6, y: 0 }, 
-  color: "blue", 
+  right: {x: 6, y: 0 },
+  color: "blue",
 }
 ```
 
@@ -732,7 +732,7 @@ emmm，我们刚才发明的数组语言。。实际上可以看作是Lisp的一
 如果用Clojure（一种Lisp的方言）写出来是这样：
 
 ```clojure
-(do 
+(do
   (def draw-triangle (fn [left top right color]
                        (draw-line left top color)
                        (draw-line top right color)
