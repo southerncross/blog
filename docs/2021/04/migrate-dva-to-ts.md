@@ -197,11 +197,7 @@ type GenerateAction<N, R, E> = {
 }[keyof E];
 
 // 构造得到TestAction类型
-export type TestAction = GenerateAction<
-  TestModel['namespace'],
-  TestModel['reducers'],
-  TestModel['effects']
->;
+export type TestAction = GenerateAction<TestModel>;
 ```
 
 当然实际的代码要比这个复杂一些，因为需要增加一些泛型限定，此外还要考虑某些没有payload的action类型（过滤掉payload属性）。
@@ -351,11 +347,7 @@ type TestModel = {
 };
 
 // 完成action的类型推导
-export TestAction = GenerateAction<
-  TestModel['namespace'],
-  TestModel['reducers'],
-  TestModel['effects],
->;
+export TestAction = GenerateAction<TestModel>;
 
 // 最后是model的具体代码
 export default testModel: TestModel = {
