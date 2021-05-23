@@ -56,10 +56,10 @@ type State = {
 interface TestModel {
   namespace: 'test';
   state: State;
-  reducers: {
+  reducers: { // reducers里几乎没有类型限定
     foo: Reducer<State>;
   };
-  effects: {
+  effects: { // effects里几乎没有类型限定
     bar: Effect;
   };
 }
@@ -82,10 +82,10 @@ type TestState = {
 type TestModel = {
   namespace: 'test';
   state: TestState;
-  reducers: {
+  reducers: { // reducers里的函数起码有了参数和返回值的限定
     foo(state: TestState, action: { payload: number }): TestState;
   };
-  effects: {
+  effects: { // effects里的函数起码有了参数和返回值的限定
     bar(action: { payload: string }): void;
   };
 };
@@ -181,10 +181,11 @@ type TestAction = {
 ```ts
 /**
  * N: namespace
+ * S: state
  * R: reducers
  * E: effects
  */
-type GenerateAction<N, R, E> = {
+type GenerateAction<M extends { namespace: N; state: S; reducers: R; effects: E }> = {
   [k in keyof R]: {
     type: `${N}/${k}`; // 拼接namespace和key
     payload: SecondParams<R[k]>; // 取reducer函数的第二个参数为payload类型
@@ -276,7 +277,7 @@ b.next(1); // 传入的这个1才是result的值
 
 ```ts
 *getUnreadMsgCount(_, { call, put }) {
-  const response: SagaReturnType<getUnreadMsgCount> = yield call(getUnreadMsgCount);
+  const response: SagaReturnType<typeof getUnreadMsgCount> = yield call(getUnreadMsgCount);
   return response.data;
 }
 ```
@@ -324,7 +325,7 @@ const { value } = useSelector(({ test }: { test: TestState }) => test.value);
 
 ```ts
 // 推导出action的工具类型
-type GenerateAction<N, S, R, E> = ...
+type GenerateAction<M> = ...
 
 // 推导出commands的工具类型
 type Commands<A> = ...
@@ -355,7 +356,9 @@ export default testModel: TestModel = {
 };
 ```
 
-这个写法有个问题，就是需要手动先把model的类型写出来，能否把这个过程直接省略了呢？比如像这样：
+（完整的代码太长了这里就不贴出了，如果感兴趣可以留言）
+
+这个写法有个不足的地方，那就是需要手动先把model的类型写出来。能否把这个过程直接省略了呢？比如像这样：
 
 ```ts
 const testModel = {
@@ -411,10 +414,10 @@ has type 'any' because it does not have a type annotation and is referenced dire
 
 ## 后记
 
-整个迁移过程遇到了很多坑，这里只是把印象比较深刻记录了一下，其实还有蛮多小问题的，比如有个eslint的报错：`Missing return type on function.eslint@typescript-eslint/explicit-module-boundary-types`，这个问题至今还没来得及解决，待搞定了再更新一下。
+整个迁移过程遇到了很多坑，这里只是把印象比较深刻记录了一下，其实还有蛮多小问题的。比如有个eslint的报错：`Missing return type on function.eslint@typescript-eslint/explicit-module-boundary-types`，这个问题查到后面发现原来是eslint的一个rule的bug，至今也没有彻底解决，最后只得把这个规则给disable掉了。
 
-Dva的ts升级体验一点也不爽，主要是因为两点吧，一是Dva使用了约定式写法，这导致很多ts的静态检查很难发挥作用，所有采用约定式写法的框架都会遇到这个问题。二是Dva底层依赖redux-saga，generator的问题注定了类型推导无法平滑实现，只能打补丁。
+总的来看，Dva的ts迁移体验一点也不爽，主要是因为两点吧，一是Dva使用了约定式写法，这导致很多ts的静态检查很难发挥作用，所有采用约定式写法的框架都会遇到这个问题。二是Dva底层依赖redux-saga，generator的问题注定了类型推导无法平滑实现，只能打补丁。
 
-以上两点，我想这也是为什么Dva官方至今一直没有给出ts参考实践的一个原因吧，确实有点蛋疼。
+而以上两点，都是从原理上注定了无法体面地改善和优化。所以我想这也是为什么Dva官方至今一直没有给出ts参考实践的一个原因吧，不是不想弄，而是确实弄不了。
 
 ![js and ts](./js-and-ts.png)
