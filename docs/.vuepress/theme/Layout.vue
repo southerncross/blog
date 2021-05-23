@@ -17,8 +17,6 @@ import Footer from './components/Footer.vue';
 import PostList from './components/PostList.vue';
 import PostContent from './components/PostContent.vue';
 
-import './common.styl'
-import './normalize.css';
 import './prism.css';
 
 export default {

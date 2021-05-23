@@ -16,9 +16,6 @@ import Footer from './components/Footer.vue';
 import PostList from './components/PostList.vue';
 import PostContent from './components/PostContent.vue';
 
-import './common.styl'
-import './normalize.css';
-
 export default {
   components: {
     Navbar,
@@ -30,8 +27,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import './variables.styl'
-
 .main
   display flex
   justify-content center
@@ -43,6 +38,6 @@ export default {
   margin 64px auto 0 auto
 
 .link:hover
-  color color-link
+  color $color-link
 </style>
 

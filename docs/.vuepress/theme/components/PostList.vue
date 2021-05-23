@@ -38,23 +38,22 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import '../variables.styl'
 .list
   padding 0
   list-style none
 
 .item
-  color color-main-text
-  border-bottom 1px dashed color-border
+  color $color-main-text
+  border-bottom 1px dashed $color-border
 
   & a
     position relative
     display block
     padding 1rem 0
-    color color-main-text
+    color $color-main-text
     &:hover
-      color color-main-text-hover
-      border-bottom-color color-main-text-hover
+      color $color-main-text-hover
+      border-bottom-color $color-main-text-hover
 
 .title
   width calc(100% - 60px)
@@ -68,6 +67,6 @@ export default {
   top 1.1rem
   right 0
   font-size 0.8rem
-  color color-quote-text
+  color $color-quote-text
 
 </style>

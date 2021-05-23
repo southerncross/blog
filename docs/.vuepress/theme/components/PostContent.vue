@@ -42,10 +42,9 @@ export default {
 </script>
 
 <style lang="stylus">
-@import '../variables.styl'
 .content
   a:hover
-    color color-link
+    color $color-link
 
   img
     max-width 100%
@@ -56,13 +55,11 @@ export default {
   p code
     padding 0 4px
     word-break break-all
-    background-color color-code-bg
+    background-color $color-code-bg
     border-radius 4px
 </style>
 
 <style scoped lang="stylus">
-@import '../variables.styl'
-
 .header
   position relative
   padding 1rem 0 2rem 0
@@ -72,10 +69,10 @@ export default {
 
 .date-and-tags
   position relative
-  color color-quote-text
+  color $color-quote-text
 
 .date
-  color color-quote-text
+  color $color-quote-text
 
 .tags
   position absolute
@@ -84,7 +81,7 @@ export default {
 .tag
   display inline-block
   margin-right 0.5em
-  color color-quote-text
+  color $color-quote-text
 
 .comment
   margin-top 100px
@@ -96,15 +93,15 @@ export default {
   width 300px
   padding-right 20px
   list-style none
-  border-right 1px dashed color-border
+  border-right 1px dashed $color-border
 
 .sidebar-item
   margin-top 6px
   text-align right
   line-height 1.2
-  color color-main-text
+  color $color-main-text
   &:hover
-    color color-link
+    color $color-link
 </style>
 
 <style lang="stylus">
@@ -115,5 +112,5 @@ export default {
   font-weight normal !important
 
 .vssue-header-powered-by span
-  color color-quote-text !important
+  color $color-quote-text !important
 </style>

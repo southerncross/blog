@@ -1,17 +1,40 @@
-@import './variables.styl'
+@css {
+:root
+	--primary-hs: 250 30%;
+	--secondary-hs: 190 40%;
+
+	--l-0: 0%;
+	--l-30: 30%;
+	--l-40: 40%;
+	--l-50: 50%;
+	--l-90: 90%;
+	--l-100: 100%;
+
+@media (prefers-color-scheme: dark)
+	:root
+		--l-0: 100%;
+		--l-30: 70%;
+		--l-40: 60%;
+		--l-90: 10%;
+		--l-100: 0%;
+}
 
 html *
   box-sizing border-box
   font-size 18px
-  font-family "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","HeitiSC","WenQuanYi Micro Hei",sans-serif;
+  font-family "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","HeitiSC","WenQuanYi Micro Hei",sans-serif
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
-  color color-main-text
+  // color hsl(0 0% var(--l-0))
+  // background-color hsl(0 0% var(--l-100))
+
+code, code *
+  font-family source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace !important
 
 blockquote
   padding-left 1rem
   color color-quote-text
-  border-left 4px solid color-border
+  border-left 4px solid $color-border
 
 @media (min-width: 600px)
   html

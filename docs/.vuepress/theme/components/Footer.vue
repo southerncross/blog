@@ -5,13 +5,11 @@
 </template>
 
 <style scoped lang="stylus">
-@import '../variables.styl'
-
 .container
   display flex
   justify-content center
   align-items center
   height 64px
   font-size 12px
-  color color-copyright
+  color $color-copyright
 </style>

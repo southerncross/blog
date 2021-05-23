@@ -18,8 +18,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import '../variables.styl'
-
 .container
   position fixed
   z-index 3
@@ -33,8 +31,8 @@ export default {
   padding 0 1em
   margin 0
   list-style none
-  background color-background
-  color color-main-text
+  background $color-background
+  color $color-main-text
   background rgba(255,255,255,1)
   box-shadow 0px 2px 4px 0px rgba(0,0,0,0.15)
 
@@ -43,11 +41,11 @@ export default {
   position absolute
   left 1em
   & a
-    color color-main-text
+    color $color-main-text
     text-decoration none
     transition color .5s
     &:hover
-      color color-main-text-hover
+      color $color-main-text-hover
 
 .avatar
   width 32px
@@ -61,9 +59,9 @@ export default {
   flex none
   margin-left 2em
   & a
-    color color-main-text
+    color $color-main-text
     text-decoration none
     transition color .5s
     &:hover
-      color color-main-text-hover
+      color $color-main-text-hover
 </style>
