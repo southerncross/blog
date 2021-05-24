@@ -4,6 +4,8 @@ date: 2021-05-16 13:40
 tags: time
 ---
 
+![what i really do](./what-i-really-do.jpg)
+
 ## 日期和时间的问题
 
 我们是做HR系统的。
