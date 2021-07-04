@@ -3,14 +3,14 @@
   <div class="header">
     <h1 class="title">{{post.title}}</h1>
     <div class="date-and-tags">
-      <span class="date">{{getPostDateString(post.frontmatter.date)}}</span>
+      <span v-if="post.frontmatter.date" class="date">{{getPostDateString(post.frontmatter.date)}}</span>
       <span v-if="post.frontmatter.tags" class="tags">
-        <span v-for="tag of post.frontmatter.tags.split(' ')" class="tag">{{tag}}</span>
+        <span v-for="tag of post.frontmatter.tags.split(' ')" :key="tag" class="tag">{{tag}}</span>
       </span>
     </div>
   </div>
   <ul v-if="post.headers" class="sidebar">
-    <li class="sidebar-item" v-for="header of post.headers.filter((x) => x.level === 2)">
+    <li class="sidebar-item" v-for="header of post.headers.filter((x) => x.level === 2)" :key="header.title">
       <a :href="getNavLink(post.path, header.title)">{{header.title}}</a>
     </li>
   </ul>

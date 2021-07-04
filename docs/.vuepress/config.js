@@ -8,7 +8,7 @@ module.exports = {
   themeConfig: {
     logo: '/favicon.png',
     nav: [
-      { text: 'Github', link: 'https://github.com/southerncross' },
+      { text: 'About', link: '/about' },
     ],
   },
   shouldPrefetch: () => false,

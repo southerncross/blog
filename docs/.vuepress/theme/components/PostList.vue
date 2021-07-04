@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <ul class="list">
-    <li class="item" v-for="post in orderedPosts">
+    <li class="item" v-for="post in orderedPosts" :key="post.title">
       <a :href="post.path">
         <div class="title">{{post.title}}</div>
         <div class="date">{{getDateStringFromPath(post.path)}}</div>
@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     orderedPosts() {
-      return [...this.posts].sort((a, b) => {
+      return this.posts.filter((p) => !p.frontmatter.about).sort((a, b) => {
         // 按时间顺序倒叙排列
         if (a.frontmatter.date && b.frontmatter.date) {
           return b.frontmatter.date.localeCompare(a.frontmatter.date)
