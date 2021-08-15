@@ -18,7 +18,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import '../variables.styl'
+@import '../styles/variables.styl'
 
 .container
   position fixed

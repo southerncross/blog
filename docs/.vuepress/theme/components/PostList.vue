@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import '../variables.styl'
+@import '../styles/variables.styl'
 .list
   padding 0
   list-style none

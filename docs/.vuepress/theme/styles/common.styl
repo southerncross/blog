@@ -1,6 +1,6 @@
 @import './variables.styl'
 
-html *
+*
   box-sizing border-box
   font-size 18px
   font-family "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","HeitiSC","WenQuanYi Micro Hei",sans-serif;
@@ -12,6 +12,9 @@ blockquote
   padding-left 1rem
   color color-quote-text
   border-left 4px solid color-border
+
+code, code *
+  font-family source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace !important;
 
 @media (min-width: 600px)
   html

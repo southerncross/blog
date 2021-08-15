@@ -1,11 +1,11 @@
 <template>
 <div class="container">
-  Designed by Lishunyang | 京ICP备20009157号 | All right reserved
+  Designed by <a href="/about">Lishunyang</a> | 京ICP备20009157号 | All right reserved
 </div>
 </template>
 
 <style scoped lang="stylus">
-@import '../variables.styl'
+@import '../styles/variables.styl'
 
 .container
   display flex
@@ -14,4 +14,10 @@
   height 64px
   font-size 12px
   color color-copyright
+
+a
+  padding 0 4px
+  font-size 12px
+  &:hover
+    color color-link
 </style>

@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="stylus">
-@import '../variables.styl'
+@import '../styles/variables.styl'
 .content
   a:hover
     color color-link
@@ -61,7 +61,7 @@ export default {
 </style>
 
 <style scoped lang="stylus">
-@import '../variables.styl'
+@import '../styles/variables.styl'
 
 .header
   position relative

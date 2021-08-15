@@ -16,8 +16,8 @@ import Footer from './components/Footer.vue';
 import PostList from './components/PostList.vue';
 import PostContent from './components/PostContent.vue';
 
-import './common.styl'
-import './normalize.css';
+import './styles/normalize.css';
+import './styles/common.styl'
 
 export default {
   components: {
@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import './variables.styl'
+@import './styles/variables.styl'
 
 .main
   display flex
