@@ -1,4 +1,4 @@
-name: Deploy Tencent COS
+name: Deploy Tencent COS incrementally
 
 on:
   push:
@@ -36,4 +36,3 @@ jobs:
           cos_region: ${{ secrets.COS_REGION }}
           local_path: docs/.vuepress/dist
           remote_path: /
-          clean: true
