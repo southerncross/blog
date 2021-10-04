@@ -1,4 +1,4 @@
-name: Deploy Tencent COS incrementally
+name: Deploy Tencent COS
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -36,3 +36,4 @@ jobs:
           cos_region: ${{ secrets.COS_REGION }}
           local_path: docs/.vuepress/dist
           remote_path: /
+          clean: true
