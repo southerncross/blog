@@ -30,6 +30,17 @@ github上也有一个相关issue，[点击这里](https://github.com/microsoft/W
 
 这个跟VPN有关，如果你使用的VPN是全局隧道，由于VPN路由表优先级最高，流量都会从VPN走，所以肯定是没法翻墙的。
 
+## Failed to establish a socket connection to proxies: ["PROXY 127.0.0.1:7890"]
+
+如果遇到这个错误，说明是代理地址不对，需要显式写出WSL2的虚拟网卡的ip地址。
+
+可以去powershell里执行ipconfig看到WSL的地址，然后覆盖WSL中的http_proxy和https_proxy，例如：
+
+```
+http_proxy=http://172.21.0.1:7890
+https_proxy=http://172.21.0.1:7890
+```
+
 ## WSL如何使用Cypress GUI
 
 Cypress GUI使用了linux原生的GUI，默认情况下WSL无法启动，不过可以参考[这篇博客](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress)解决。
