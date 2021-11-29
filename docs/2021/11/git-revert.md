@@ -236,6 +236,10 @@ fatal: revert failed
 
 > 我见过最长的 revert 是反复 revert 了 5 遍的，简直连亲妈都已经不认识了。
 
+git官方文档首页中专门有一段内容区分什么是`git reset`和`git revert`，可见很多人都不太会真的使用revert命令。其实git revert跟git cherry-pick很类似，这俩应该是归为一类。revert其实就是cherry-pick的逆操作，如果你理解了cherry-pick，那完全可以仿照着去理解revert，反之也是一样。
+
+那么问题来了，你觉得cherry-pick简单吗？
+
 ## 我们到底做错了什么？
 
 回到最开头的丢代码的例子，为什么会产生这样的结果？相信如果你理解了前面的内容，心里早就有答案了。那么我们到底做错了什么呢？
