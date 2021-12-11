@@ -146,13 +146,29 @@ revert 的例子讲完了，回顾上面的过程，我们到底做错了什么�
 
 比如，commit 是不包含 diff 信息的，你在各种工具上看到的 commit 的改动，是拿当前 commit 跟他的上一次 commit（parent）做 diff 得到的（每个 commit 包含了上一次 commit 的 hash，也就是 parent 指针）。
 
-再比如，在很多人心中，branch 是一连串 commit 组成的一个分支，然而实际上，在 git 中 branch 仅仅就是一个指针（指向最后一次 commit）。而我们之所以容易把 branch 当成是一连串 commit，大概是因为这样更符合 branch 的意象，而很多可视化 git 工具也会加强这个意象。
+再比如，在很多人心中，branch 是一连串 commit 组成的一个分支，然而实际上，在 git 中 branch 仅仅就是一个指针（指向最后一次 commit）。而我们之所以容易把 branch 当成是一连串 commit，大概是因为这样更符合 branch 的意象，而很多可视化 git 工具的graph无形之中也加强的这个印象。
 
 ![git branch](./git-branch.png)
 
-git 的分支概念，完全是人为赋予的逻辑概念，是为了方便大家理解，但恰恰因为如此，大家才会对一些 git 操作结果产生奇怪的误解。
+git 的分支概念，完全是人为赋予的逻辑概念，只是为了方便大家理解，但恰恰因为如此，大家就容易对一些 git 操作结果产生奇怪的误解。
 
-举个基本的分支合并的例子，`git merge`。相信有很多同学都知道 git 的分支合并策略是 3-way-merge（不考虑 fast-forward 的情况下）。那你有想过为什么是 3-way-merge 吗？既然每个 branch 上有什么改动都是已知的，为什么不能直接 2-way-merge 呢？为什么一定要三方合并呢？
+举个例子，你是否有过这样的经历：修好了一个bug，正准备push的时候，突然发现：哎呀，糟了，直接commit在master上了，而master是受保护分支禁止直接commit，只能合并PR。那么这个时候，你该怎么办呢？
+
+有的同学（包括我以前也是）的做法是这样的：
+
+1. `git reset HEAD^ --soft`，拆掉最后一次commit
+2. `git checkout -b fix-blablabla`，此时checkout出一个新分支
+3. `git commit -m "blablabla"`，重新提交到新分支上
+4. `git push`，push代码
+
+当然，还有其他类似的做法，比如用到cherry-pick之类的。这样做当然一点问题没有，但最佳做法其实是：
+
+1. `git checkout -b fix-blablabla`，直接在当前commit上checkout出新分支
+2. `git push`，push代码
+
+也就是说，拆commit和重新commit是完全没必要的操作。为什么呢？因为branch只是一个pointer。
+
+再举一个分支合并的例子，`git merge`。相信有很多同学都知道 git 的分支合并策略是 3-way-merge（不考虑 fast-forward 的情况下）。那你有想过为什么是 3-way-merge 吗？既然每个 branch 上有什么改动都是已知的，为什么不能直接 2-way-merge 呢？为什么一定要三方合并呢？
 
 不知道你有没有过这样的疑惑，反正当年我是挺迷惑的。
 
