@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  Designed by <a href="/about">Lishunyang</a> | 京ICP备20009157号 | All right reserved
+  Designed by <a href="/about">Lishunyang</a> | <a href="https://beian.miit.gov.cn/" target="_blank">京ICP备20009157号</a> | All right reserved
 </div>
 </template>
 
