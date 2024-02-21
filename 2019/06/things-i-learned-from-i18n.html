@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/blog/favicon.png">
   <meta name="keywords" content="Javascript,HTTP,Nodejs,React">
     
-    <link rel="preload" href="/blog/assets/css/0.styles.1049df1f.css" as="style"><link rel="preload" href="/blog/assets/js/app.c3af64bb.js" as="script"><link rel="preload" href="/blog/assets/js/3.6f4cefaa.js" as="script"><link rel="preload" href="/blog/assets/js/34.d208cdb7.js" as="script">
+    <link rel="preload" href="/blog/assets/css/0.styles.1049df1f.css" as="style"><link rel="preload" href="/blog/assets/js/app.a12d30be.js" as="script"><link rel="preload" href="/blog/assets/js/3.6f4cefaa.js" as="script"><link rel="preload" href="/blog/assets/js/34.6ec08d4d.js" as="script">
     <link rel="stylesheet" href="/blog/assets/css/0.styles.1049df1f.css">
   </head>
   <body>
@@ -35,6 +35,6 @@ i18n<span class="token punctuation">.</span><span class="token function">_</span
 </code></pre></div><p>这本是一个方便开发者的特性，但某些场景下遇到了严重的问题。因为做这个transform的babel-plugin与es6-plugin产生了一些微妙的不好的化学反应。</p> <p>这是因为babel在做transform的时候，只会遍历一次ATS，然后针对每个节点依次应用各种plugin。假如现在有两个plugin，一个处理专门处理A类型的节点，一个会把B类型的节点转换成A类型的节点。如果babel先遍历了B类型的节点，再遍历A类型的节点，那么就没有问题，但假如babel先遍历了A类型的节点（第一个plugin生效了），然后遍历B类型的节点（第二个plugin把B类型转换成了A类型），因为A类型的节点已经遍历过了，不会再生效了，所以这个A类型的节点将不会被第一个plugin处理。结果就得到了错误的转换结果。</p> <p>针对这个问题，其实没有什么解决办法，除非修改babel的执行逻辑，但这基本是不可能的事情，而且这种问题通常只有在运行时才会暴露，非常难发现。</p> <p>唯一的解决办法就是不要用babel-plugin，babel-plugin越少越好。</p> <h2 id="支持局部翻译，做好灰度测试"><a href="#支持局部翻译，做好灰度测试" class="header-anchor">#</a> 支持局部翻译，做好灰度测试</h2> <p>国际化不是一个小工程，它对整个系统带来的改变是非常巨大的。如果指望国际化全部翻译完成再上线，回归范围将变得无比庞大，风险是不可控的。</p> <p>为了控制风险，我们必须一小部分一小部分地实现国际化，小步快跑。改一部分测一部分再上线一部分。为了做到这一点，必须要有灰度发布的能力，不完整的国际化UI仅对测试账号开放，方便测试。等所有国际化工作完成之后在正式开放给其他用户。</p> <p>其实对于代码重构也是一样，不要想着翻天覆地的大重构，你要考虑测试同事们的感受。</p> <h2 id="国际化可以用来检测css水平"><a href="#国际化可以用来检测css水平" class="header-anchor">#</a> 国际化可以用来检测CSS水平</h2> <p>这算是国际化带来的一个启发吧，如果你想面试前端工程师，或者想考察前端工程师的CSS水平，那就让他写一个稍微复杂点的页面吧，然后用chrome的翻译功能转换成英文，如果页面样式乱得一塌糊涂，说明CSS写得不够灵活，反之说明CSS水平高，哈哈哈哈。</p></div></div> <div class="comment" data-v-63da4bd6><!----></div></div></div> <div class="container" data-v-07c4fbe2 data-v-ad494eec>
   Designed by <a href="/about" data-v-07c4fbe2>Lishunyang</a> | <a href="https://beian.miit.gov.cn/" target="_blank" data-v-07c4fbe2>京ICP备20009157号</a> | All right reserved
 </div></div><div class="global-ui"></div></div>
-    <script src="/blog/assets/js/app.c3af64bb.js" defer></script><script src="/blog/assets/js/3.6f4cefaa.js" defer></script><script src="/blog/assets/js/34.d208cdb7.js" defer></script>
+    <script src="/blog/assets/js/app.a12d30be.js" defer></script><script src="/blog/assets/js/3.6f4cefaa.js" defer></script><script src="/blog/assets/js/34.6ec08d4d.js" defer></script>
   </body>
 </html>
