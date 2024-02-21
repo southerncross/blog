@@ -11,6 +11,7 @@ module.exports = {
       { text: 'About', link: '/about.html' },
     ],
   },
+  base: '/blog/',
   shouldPrefetch: () => false,
   plugins: {
     '@vuepress/google-analytics': {
