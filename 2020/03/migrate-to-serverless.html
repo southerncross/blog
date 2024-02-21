@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/favicon.png">
   <meta name="keywords" content="Javascript,HTTP,Nodejs,React">
     
-    <link rel="preload" href="/assets/css/0.styles.1049df1f.css" as="style"><link rel="preload" href="/assets/js/app.cd5892af.js" as="script"><link rel="preload" href="/assets/js/3.6f4cefaa.js" as="script"><link rel="preload" href="/assets/js/20.79e8be84.js" as="script">
+    <link rel="preload" href="/assets/css/0.styles.1049df1f.css" as="style"><link rel="preload" href="/assets/js/app.73f191c4.js" as="script"><link rel="preload" href="/assets/js/3.6f4cefaa.js" as="script"><link rel="preload" href="/assets/js/20.79e8be84.js" as="script">
     <link rel="stylesheet" href="/assets/css/0.styles.1049df1f.css">
   </head>
   <body>
@@ -90,6 +90,6 @@ scf deploy -f -t tencent-serverless.yml
 </code></pre></div><h2 id="大功告成"><a href="#大功告成" class="header-anchor">#</a> 大功告成</h2> <p>ok，到这里基本上所有工作都做完了，现在跑一下部署脚本，如果一切正常，你就可以通过API网关访问博客了。记得给API网关绑定一个自定义域名，美滋滋。</p> <h1 id="后记"><a href="#后记" class="header-anchor">#</a> 后记</h1> <p>用serverless托管博客并不是云函数真正的用途，云函数的能力是很强大的，这里有点大材小用。</p> <p>整个过程折腾下来，遇到了不少坑，其实有一个最主要的坑前面都没提，那就是云函数的测试、debug很麻烦。基本无法在本地测试（scf支持本地测试，但那个测试非常有限），最方便的方式就是去Web控制台打log，然后触发调试。效率低不说，而且腾讯云的API文档不是很详细，没有文档参考的时候只能靠console.log。比如，在做缓存逻辑的时候，If-Modified-Since这个header死活就是比较不对，后来发现是云函数传入的参数里有一些蜜汁字符。再比如，API网关绑定自定义域名的时候，目录环境名称就是配置不对，文档里也没详细说，后来各种尝试竟然给试出来了。。</p> <p>撒花庆祝</p> <p>希望这篇博客能帮助到大家 😄</p></div></div> <div class="comment" data-v-63da4bd6><!----></div></div></div> <div class="container" data-v-07c4fbe2 data-v-ad494eec>
   Designed by <a href="/about" data-v-07c4fbe2>Lishunyang</a> | <a href="https://beian.miit.gov.cn/" target="_blank" data-v-07c4fbe2>京ICP备20009157号</a> | All right reserved
 </div></div><div class="global-ui"></div></div>
-    <script src="/assets/js/app.cd5892af.js" defer></script><script src="/assets/js/3.6f4cefaa.js" defer></script><script src="/assets/js/20.79e8be84.js" defer></script>
+    <script src="/assets/js/app.73f191c4.js" defer></script><script src="/assets/js/3.6f4cefaa.js" defer></script><script src="/assets/js/20.79e8be84.js" defer></script>
   </body>
 </html>

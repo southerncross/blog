@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/favicon.png">
   <meta name="keywords" content="Javascript,HTTP,Nodejs,React">
     
-    <link rel="preload" href="/assets/css/0.styles.1049df1f.css" as="style"><link rel="preload" href="/assets/js/app.cd5892af.js" as="script"><link rel="preload" href="/assets/js/3.6f4cefaa.js" as="script"><link rel="preload" href="/assets/js/17.dd9c4d18.js" as="script">
+    <link rel="preload" href="/assets/css/0.styles.1049df1f.css" as="style"><link rel="preload" href="/assets/js/app.73f191c4.js" as="script"><link rel="preload" href="/assets/js/3.6f4cefaa.js" as="script"><link rel="preload" href="/assets/js/17.7496995c.js" as="script">
     <link rel="stylesheet" href="/assets/css/0.styles.1049df1f.css">
   </head>
   <body>
@@ -32,6 +32,6 @@ http://[2010:836B:4179::836B:4179]
 </code></pre></div><p>按理说非URL字符需要百分号编码，这样写出来的URL难道不是错的吗。其实多虑了，这样写跟你在浏览器的地址栏里直接输入中文URL是一样的效果，浏览器在发出请求前会自动帮你做一次“encode”。但是注意，这里的encode可不是直接调用了javascript自带的encodeURI（如果你没看懂这句话，我算是白解释了）。</p> <p>那么，如果要保证兼容性，还是得把URL来个encodeURI靠谱（至少解决了<code>[]</code>的兼容性问题。但这里要注意了，encodeURI的内容如果包含了百分号，那么百分号会被再次encode，得到的结果可能并不是想要的。总之就是，encodeURL这个事情，有点麻烦。。</p> <p>其实本来已经心满意足了，结果我又想了想，既然<code>[]</code>在新版规范里已经属于合法URL字符集了，那之前的一帮难兄难弟诸如<code>{}</code>，<code>|</code>，<code>^</code>是不是也可以平反了？但是翻遍了RFC-3986也没有看到关于这几个字符的调整，所以说这几个仍然算是unwise字符咯？</p> <p>为了满足我的好奇心，我在浏览器中输入一个<code>https://stackoverflow.com/search?q=square+brackets+{中文}</code>（注意最后是个<code>{}</code>）。结果出乎意料，<code>{}</code>也没有被编码：</p> <p><img src="/assets/img/uri_bracket_test.6054784f.png" alt=""></p> <p>然后，经过大概3分钟的加载时间后，stackoverflow挂了🤦</p> <p><img src="/assets/img/stack_overflow_down.e8830573.png" alt=""></p> <p>看来的确是个令人头疼的问题啊</p></div></div> <div class="comment" data-v-63da4bd6><!----></div></div></div> <div class="container" data-v-07c4fbe2 data-v-ad494eec>
   Designed by <a href="/about" data-v-07c4fbe2>Lishunyang</a> | <a href="https://beian.miit.gov.cn/" target="_blank" data-v-07c4fbe2>京ICP备20009157号</a> | All right reserved
 </div></div><div class="global-ui"></div></div>
-    <script src="/assets/js/app.cd5892af.js" defer></script><script src="/assets/js/3.6f4cefaa.js" defer></script><script src="/assets/js/17.dd9c4d18.js" defer></script>
+    <script src="/assets/js/app.73f191c4.js" defer></script><script src="/assets/js/3.6f4cefaa.js" defer></script><script src="/assets/js/17.7496995c.js" defer></script>
   </body>
 </html>
