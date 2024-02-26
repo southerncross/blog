@@ -9,7 +9,7 @@
     <meta name="description" content="Lishunyang&#39;s Blog">
     <meta name="keywords" content="Javascript,HTTP,Nodejs,React">
     
-    <link rel="preload" href="/blog/assets/css/0.styles.f6963c64.css" as="style"><link rel="preload" href="/blog/assets/js/app.6c59e45f.js" as="script"><link rel="preload" href="/blog/assets/js/2.7a1ed99b.js" as="script"><link rel="preload" href="/blog/assets/js/6.384b03e6.js" as="script">
+    <link rel="preload" href="/blog/assets/css/0.styles.f6963c64.css" as="style"><link rel="preload" href="/blog/assets/js/app.b091bea5.js" as="script"><link rel="preload" href="/blog/assets/js/2.7a1ed99b.js" as="script"><link rel="preload" href="/blog/assets/js/6.7756fb3a.js" as="script">
     <link rel="stylesheet" href="/blog/assets/css/0.styles.f6963c64.css">
   </head>
   <body>
@@ -55,6 +55,6 @@
 </code></pre></div><p>其中<code>TENCENT_CLOUD_SECRET_ID</code>、<code>TENCENT_CLOUD_SECRET_KEY</code>、<code>COS_BUCKET</code>、<code>COS_REGION</code>是 repo secret，对应的含义可以看<a href="https://github.com/marketplace/actions/tencent-cos-action" target="_blank" rel="noopener noreferrer">这里<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p>做完上面这些，每次写完博客，只需要 push 到 github 上，就会触发 workflow，自动构建并上传到 oss 上，实现自动发布了。</p> <h2 id="一点感受"><a href="#一点感受" class="header-anchor">#</a> 一点感受</h2> <p>这次的迁移过程比原来迁移到 serverless 简单多了，从上手到完成一共就折腾了不到 1 个小时，大部分配置都可以看懂，个别地方查查文档就够了。而且 oss 本身就支持静态资源类型，看来是早有打算。不得不说腾讯云这一年来迭代了不少东西，感觉搭建个人博客越来越傻瓜了，体验真的不要太爽。从体验这个角度上看，jamstack 确实是一种先进的架构。</p> <p>但凡事都是两面的，jamstack 这种博客搭建的方式，虽然傻瓜方便了不少，但也从此跟云服务商深度绑定在一起了，具有基础设施依赖。假如某一天想迁移到其他云上面，还是得再折腾一遍，而传统的服务器方式是不存在这个问题的。这个问题也许会比想象的严重一些，因为国内的服务商似乎都比较喜欢干跑马圈地的事情，本来没事儿愣是搞出一些恶心的限制，强行增加用户的迁移成本，目的是给自己的产品增加壁垒。</p> <p>另外一个遗憾，就是失去了对底层的控制（oss、cdn），变得黑盒起来。假如未来人人都是用这种方式搭建博客，黑盒的部分没什么知识储备，如果出了什么问题就只能抓虾了。从学习的角度看，其实是不利于开发人员系统地学习全栈流程的。不过这个遗憾也不是很严重，就好比原来大家都是开手动挡的车，自从出现了自动挡，大家都去开自动挡了，手动档的车反倒不会开了。</p> <p>emmm，从学习的角度上看，云服务器还是不能退掉，还是得继续折腾才行。（怎么好像反而比原来花的钱更多了）</p></div></div> <div class="comment" data-v-63da4bd6><Vssue data-v-63da4bd6></Vssue></div></div></div> <div class="container" data-v-2d129ad4 data-v-ad494eec>
   Designed by <a href="/about" data-v-2d129ad4>Lishunyang</a> | All right reserved
 </div></div><div class="global-ui"></div></div>
-    <script src="/blog/assets/js/app.6c59e45f.js" defer></script><script src="/blog/assets/js/2.7a1ed99b.js" defer></script><script src="/blog/assets/js/6.384b03e6.js" defer></script>
+    <script src="/blog/assets/js/app.b091bea5.js" defer></script><script src="/blog/assets/js/2.7a1ed99b.js" defer></script><script src="/blog/assets/js/6.7756fb3a.js" defer></script>
   </body>
 </html>

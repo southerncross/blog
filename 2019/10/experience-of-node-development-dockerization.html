@@ -9,7 +9,7 @@
     <meta name="description" content="Lishunyang&#39;s Blog">
     <meta name="keywords" content="Javascript,HTTP,Nodejs,React">
     
-    <link rel="preload" href="/blog/assets/css/0.styles.f6963c64.css" as="style"><link rel="preload" href="/blog/assets/js/app.6c59e45f.js" as="script"><link rel="preload" href="/blog/assets/js/2.7a1ed99b.js" as="script"><link rel="preload" href="/blog/assets/js/39.e442c99a.js" as="script">
+    <link rel="preload" href="/blog/assets/css/0.styles.f6963c64.css" as="style"><link rel="preload" href="/blog/assets/js/app.b091bea5.js" as="script"><link rel="preload" href="/blog/assets/js/2.7a1ed99b.js" as="script"><link rel="preload" href="/blog/assets/js/39.9d680912.js" as="script">
     <link rel="stylesheet" href="/blog/assets/css/0.styles.f6963c64.css">
   </head>
   <body>
@@ -34,6 +34,6 @@ services:
 </code></pre></div><p>需要注意的是他们产生的持久化数据需要放在volume里。</p> <h1 id="这样做值得吗"><a href="#这样做值得吗" class="header-anchor">#</a> 这样做值得吗？</h1> <p>容器化看着很美好，但至少在Docker这种image+container的方式下，要想利用或者说发挥它的优势，至少需要满足两个条件：</p> <ol><li>build image可以很慢，但build过程必须是个低频的过程，这样build开销可以被平摊到忽略不计的程度。</li> <li>build image可以很复杂，但启动container必须要尽量简单，这样对容器的复制、扩容、迁移等运维就更加方便。</li></ol> <p>在回过头来看看开发环境引入docker，如果node_modules放在image里，则不满足条件1，如果node_modules放在image外面，则不满足条件2。至少对于node开发而言，开发环境docker化，也就是一开始我的那个目标“完全用docker托管开发环境”是不合适的。如果非要这么做，node_modules放在外面是一个相对更好的方案，因为放弃条件2的收益对开发环境影响不会很大。</p> <p>反倒是那些稳定的第三方服务，比如mysql、redis等，使用docker托管是非常合适的。因为他们的image不频繁变化，且image可以做足够多的事情让启动container变得非常简单。那还有什么场景符合这个标准呢？没错，那就是生产环境，在生产环境全面引入docker托管非常合适。</p> <p>那么开发环境就没有引入docker的意义了吗？当然不。回顾一下文章开头的设想：</p> <blockquote><p>我希望完全用docker托管开发环境，宿主系统上不安装任何开发环境依赖。假如我们要做node开发，那宿主机上不允许安装node。</p></blockquote> <p>假如换一下，将目标调整为：</p> <blockquote><p>我希望用docker托管开发环境中的第三方依赖，然后宿主环境只需要处理好代码直接相关的环境即可。</p></blockquote> <p>如果是这样，那我们就可以将源代码、node_modules通通放在宿主环境，将mysql、redis、elasticsearch等大型第三方依赖放在docker中托管。这样虽然无法做到完全docker化，但还是将大量代码无关的依赖分离了出去，仍然是非常有意义的，要知道在本地安装mysql也是一个麻烦事情，因为要处理各种配置、建表之类的工作。</p> <p>在开发环境中，docker+宿主，取长补短，也许这才是Docker最正确的用法。</p></div></div> <div class="comment" data-v-63da4bd6><Vssue data-v-63da4bd6></Vssue></div></div></div> <div class="container" data-v-2d129ad4 data-v-ad494eec>
   Designed by <a href="/about" data-v-2d129ad4>Lishunyang</a> | All right reserved
 </div></div><div class="global-ui"></div></div>
-    <script src="/blog/assets/js/app.6c59e45f.js" defer></script><script src="/blog/assets/js/2.7a1ed99b.js" defer></script><script src="/blog/assets/js/39.e442c99a.js" defer></script>
+    <script src="/blog/assets/js/app.b091bea5.js" defer></script><script src="/blog/assets/js/2.7a1ed99b.js" defer></script><script src="/blog/assets/js/39.9d680912.js" defer></script>
   </body>
 </html>

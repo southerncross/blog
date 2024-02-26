@@ -9,7 +9,7 @@
     <meta name="description" content="Lishunyang&#39;s Blog">
     <meta name="keywords" content="Javascript,HTTP,Nodejs,React">
     
-    <link rel="preload" href="/blog/assets/css/0.styles.f6963c64.css" as="style"><link rel="preload" href="/blog/assets/js/app.6c59e45f.js" as="script"><link rel="preload" href="/blog/assets/js/2.7a1ed99b.js" as="script"><link rel="preload" href="/blog/assets/js/23.66319a8e.js" as="script">
+    <link rel="preload" href="/blog/assets/css/0.styles.f6963c64.css" as="style"><link rel="preload" href="/blog/assets/js/app.b091bea5.js" as="script"><link rel="preload" href="/blog/assets/js/2.7a1ed99b.js" as="script"><link rel="preload" href="/blog/assets/js/23.66319a8e.js" as="script">
     <link rel="stylesheet" href="/blog/assets/css/0.styles.f6963c64.css">
   </head>
   <body>
@@ -228,6 +228,6 @@ b<span class="token punctuation">.</span><span class="token function">next</span
 </code></pre></div><p>我尝试了很多种写法想解决这个问题，但都失败了，也许从根本上来讲，这种递归类型确实是无法实现的。如果确实是这样，那么自动推导出 model 的类型这个想法也是无法实现的。</p> <p>如果你有好的办法，欢迎告诉我。</p> <h2 id="后记"><a href="#后记" class="header-anchor">#</a> 后记</h2> <p>整个迁移过程遇到了很多坑，这里只是把印象比较深刻记录了一下，其实还有蛮多小问题的。比如有个 eslint 的报错：<code>Missing return type on function.eslint@typescript-eslint/explicit-module-boundary-types</code>，这个问题查到后面发现原来是 eslint 的一个 rule 的 bug，至今也没有彻底解决，最后只得把这个规则给 disable 掉了。</p> <p>总的来看，Dva 的 ts 迁移体验一点也不爽，主要是因为两点吧，一是 Dva 使用了约定式写法，这导致很多 ts 的静态检查很难发挥作用，所有采用约定式写法的框架都会遇到这个问题。二是 Dva 底层依赖 redux-saga，generator 的问题注定了类型推导无法平滑实现，只能打补丁。</p> <p>而以上两点，都是从原理上注定了无法体面地改善和优化。所以我想这也是为什么 Dva 官方至今一直没有给出 ts 参考实践的一个原因吧，不是不想弄，而是确实弄不了。</p> <p><img src="/blog/assets/img/js-and-ts.db3288e5.png" alt="js and ts"></p></div></div> <div class="comment" data-v-63da4bd6><Vssue data-v-63da4bd6></Vssue></div></div></div> <div class="container" data-v-2d129ad4 data-v-ad494eec>
   Designed by <a href="/about" data-v-2d129ad4>Lishunyang</a> | All right reserved
 </div></div><div class="global-ui"></div></div>
-    <script src="/blog/assets/js/app.6c59e45f.js" defer></script><script src="/blog/assets/js/2.7a1ed99b.js" defer></script><script src="/blog/assets/js/23.66319a8e.js" defer></script>
+    <script src="/blog/assets/js/app.b091bea5.js" defer></script><script src="/blog/assets/js/2.7a1ed99b.js" defer></script><script src="/blog/assets/js/23.66319a8e.js" defer></script>
   </body>
 </html>

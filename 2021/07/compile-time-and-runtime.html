@@ -9,7 +9,7 @@
     <meta name="description" content="Lishunyang&#39;s Blog">
     <meta name="keywords" content="Javascript,HTTP,Nodejs,React">
     
-    <link rel="preload" href="/blog/assets/css/0.styles.f6963c64.css" as="style"><link rel="preload" href="/blog/assets/js/app.6c59e45f.js" as="script"><link rel="preload" href="/blog/assets/js/2.7a1ed99b.js" as="script"><link rel="preload" href="/blog/assets/js/26.4a9052cb.js" as="script">
+    <link rel="preload" href="/blog/assets/css/0.styles.f6963c64.css" as="style"><link rel="preload" href="/blog/assets/js/app.b091bea5.js" as="script"><link rel="preload" href="/blog/assets/js/2.7a1ed99b.js" as="script"><link rel="preload" href="/blog/assets/js/26.4a9052cb.js" as="script">
     <link rel="stylesheet" href="/blog/assets/css/0.styles.f6963c64.css">
   </head>
   <body>
@@ -47,6 +47,6 @@
 </code></pre></div><p>显然动态方案更好，因为不需要每个环境都单独build一次，而且如果cdn突然挂掉了，要临时切换，也不需要改代码，只需要调整<code>fetchPublicPath</code>接口的返回值就可以了。</p> <blockquote><p>打包工具都支持运行时的publicPath，例如webpack的<code>__webpack_public_path__</code>就是干这个事情的。</p></blockquote> <h2 id="从静态和动态的角度思考问题"><a href="#从静态和动态的角度思考问题" class="header-anchor">#</a> 从静态和动态的角度思考问题</h2> <blockquote><p>我个人更推荐使用“静态”和“动态”而不是“编译时”和“运行时”的说法，因为“编译时”和“运行时”容易让人局限在编译器或者代码层面。</p></blockquote> <p>任何一个有实际功能的应用程序，都是既有静态的部分和静态的部分。静态的部分至少要包含符合语法规范的代码，而动态的部分至少会包含运行时的外部环境。为了实现所需的功能，静态的部分多一些，动态的部分就相应少一些，反之亦然，二者是相互补充的，就像势能和动能之合总是守恒一样。</p> <p>有关编译时（静态）和运行时（动态）的例子还可以举出很多。但这篇文章不是用来告诉你什么时候应该用哪个。因为通常你都需要结合具体上下文分析和折衷。这篇文章是希望你能重视起这两个概念，当你遇到一个新方案或者新问题时，试着从编译时和运行时的角度分析一下，也许有不同的发现。</p> <p>比如依赖注入（DI），其实就是将模块依赖的管理方式从编译时转移到了运行时，从而实现了更灵活的代码复用。</p> <p>比如CSS变量（variable），其实就是给CSS增加了一定运行时能力，以实现动态改变CSS效果（例如CSS主题）。</p> <p>比如SSG（Static Site Generate），其实就是提前将运行时渲染的页面提前渲染成静态页面，从而加速了页面生成和渲染的速度。</p> <p>比如JamStack，其实就是把前端应用静态化了，因而可以去掉web server层，通过oss直接托管页面。</p> <p>比如treeshaking，其实就是利用静态分析能力去除dead code，毕竟是静态分析，对写法有一定要求，无法做到100%去除无用代码。</p> <p>最后，不要过分迷恋或者追求某一种能力，静态和动态二者是相辅相成的，要两条腿走路，不要偏科。</p></div></div> <div class="comment" data-v-63da4bd6><Vssue data-v-63da4bd6></Vssue></div></div></div> <div class="container" data-v-2d129ad4 data-v-ad494eec>
   Designed by <a href="/about" data-v-2d129ad4>Lishunyang</a> | All right reserved
 </div></div><div class="global-ui"></div></div>
-    <script src="/blog/assets/js/app.6c59e45f.js" defer></script><script src="/blog/assets/js/2.7a1ed99b.js" defer></script><script src="/blog/assets/js/26.4a9052cb.js" defer></script>
+    <script src="/blog/assets/js/app.b091bea5.js" defer></script><script src="/blog/assets/js/2.7a1ed99b.js" defer></script><script src="/blog/assets/js/26.4a9052cb.js" defer></script>
   </body>
 </html>

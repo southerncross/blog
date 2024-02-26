@@ -9,7 +9,7 @@
     <meta name="description" content="Lishunyang&#39;s Blog">
     <meta name="keywords" content="Javascript,HTTP,Nodejs,React">
     
-    <link rel="preload" href="/blog/assets/css/0.styles.f6963c64.css" as="style"><link rel="preload" href="/blog/assets/js/app.6c59e45f.js" as="script"><link rel="preload" href="/blog/assets/js/2.7a1ed99b.js" as="script"><link rel="preload" href="/blog/assets/js/36.920da182.js" as="script">
+    <link rel="preload" href="/blog/assets/css/0.styles.f6963c64.css" as="style"><link rel="preload" href="/blog/assets/js/app.b091bea5.js" as="script"><link rel="preload" href="/blog/assets/js/2.7a1ed99b.js" as="script"><link rel="preload" href="/blog/assets/js/36.920da182.js" as="script">
     <link rel="stylesheet" href="/blog/assets/css/0.styles.f6963c64.css">
   </head>
   <body>
@@ -256,6 +256,6 @@ SyntaxError: Invalid regular expression: Range out of order in character class
 </code></pre></div><h2 id="生产环境中的bug以及如何避免"><a href="#生产环境中的bug以及如何避免" class="header-anchor">#</a> 生产环境中的bug以及如何避免</h2> <p>举一个实际的例子，twitter的每一个tweet只允许140个字符，而后端可不管这是什么字符，BMP还是非BMP。但是因为Javascript在前端是仅仅通过<code>length</code>方法判断长度，所以如果你输入的都是非BMP字符，那最多只能打70个。（这个bug现在已经被修复了）</p> <p>许多javascript的库都没能正确处理非BMP字符。比如countable.js,underscore.js等等。有时候html中包含一些特殊的数字也可能导致html解码失败，比如&amp;#X1F4A9。这里推荐he这个库做html的编解码。</p> <p>以上这些都是比较容易产生和修复的错误，毕竟Javascript处理Unicode是很麻烦的。那么除了修复的办法，怎么发现这些错误呢？</p> <h2 id="the-pile-of-poo-test"><a href="#the-pile-of-poo-test" class="header-anchor">#</a> The Pile of Poo Test</h2> <p>无论何时当你编写需要处理字符串或正则表达式的代码时，记得在UT的字符串里添加一个翔（💩），然后看看是否正常。这个方法很方便，很管用，也很有趣，能帮助你检查你的代码是否正确处理了非BMP字符。如果你发现了错误，你就可以使用上面介绍的方法修复了。</p> <p>更完善的Unicode字符串是<code>Iñtërnâtiônàlizætiøn☃💩</code>，这20个字符包含了从U+0100到U+FFFF的BMP字符，以及从U+010000到U+10FFF的非BMP字符。</p></div></div> <div class="comment" data-v-63da4bd6><Vssue data-v-63da4bd6></Vssue></div></div></div> <div class="container" data-v-2d129ad4 data-v-ad494eec>
   Designed by <a href="/about" data-v-2d129ad4>Lishunyang</a> | All right reserved
 </div></div><div class="global-ui"></div></div>
-    <script src="/blog/assets/js/app.6c59e45f.js" defer></script><script src="/blog/assets/js/2.7a1ed99b.js" defer></script><script src="/blog/assets/js/36.920da182.js" defer></script>
+    <script src="/blog/assets/js/app.b091bea5.js" defer></script><script src="/blog/assets/js/2.7a1ed99b.js" defer></script><script src="/blog/assets/js/36.920da182.js" defer></script>
   </body>
 </html>
