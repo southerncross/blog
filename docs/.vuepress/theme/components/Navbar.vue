@@ -2,7 +2,7 @@
   <ul class="container">
     <li class="title"><a :href="$site.base"><img class="avatar" src="../assets/avatar.jpg"/>Lishunyang's Blog</a></li>
     <li class="item" v-for="item in $site.themeConfig.nav" :key="item.link">
-      <a :href="item.link">{{item.text}}</a>
+      <a :href="$withBase(item.link)">{{item.text}}</a>
     </li>
   </ul>
 </template>
