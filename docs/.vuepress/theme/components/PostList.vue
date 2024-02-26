@@ -2,7 +2,7 @@
 <div class="container">
   <ul class="list">
     <li class="item" v-for="post in orderedPosts" :key="post.title">
-      <a :href="post.path">
+      <a :href="$withBase(post.path)">
         <div class="title">{{post.title}}</div>
         <div class="date">{{getDateStringFromPath(post.path)}}</div>
       </a>
